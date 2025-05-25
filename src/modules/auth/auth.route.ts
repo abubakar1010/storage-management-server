@@ -2,12 +2,14 @@ import { Router } from "express";
 import { AuthControllers } from "./auth.controller";
 import requestValidator from "../../middleware/request-validator";
 import {
+    changePasswordValidationSchema,
     forgotPasswordValidationSchema,
     optVerificationValidationSchema,
     resetPasswordValidationSchema,
     userLoginValidationSchema,
     userRegistrationValidationSchema,
 } from "./auth.validation";
+import auth from "../../middleware/auth";
 
 const router = Router();
 
@@ -45,6 +47,15 @@ router.post(
     "/reset-password",
     requestValidator(resetPasswordValidationSchema),
     AuthControllers.resetPassword,
+);
+
+// change password routes
+
+router.post(
+    "/change-password",
+    auth,
+    requestValidator(changePasswordValidationSchema),
+    AuthControllers.changePassword,
 );
 
 export const AuthRoutes = router;
