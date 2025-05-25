@@ -19,7 +19,7 @@ const otpTokenSchema = new Schema<IOTPToken>(
             type: Date,
             required: true,
         },
-        used: {
+        verified: {
             type: Boolean,
             default: false,
         },

@@ -98,10 +98,6 @@ const forgotPassword = async (email: string): Promise<{ message: string }> => {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to generate OTP");
     }
 
-    // create OTP token document
-
-    // data
-
     const newOtp = {
         userId: user._id,
         otp,
@@ -129,12 +125,26 @@ const forgotPassword = async (email: string): Promise<{ message: string }> => {
     };
 };
 
-const verifyOTP = async (userId: string, otp: string): Promise<{ message: string }> => {
+const verifyOTP = async (email: string, otp: string): Promise<{ message: string }> => {
+    // Find the user by email
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User not found with this email");
+    }
+
     // Find the OTP token for the user
-    const otpToken = await OTPToken.findOne({ userId });
+    const otpToken = await OTPToken.findOne({ userId: user._id });
 
     if (!otpToken) {
         throw new ApiError(httpStatus.NOT_FOUND, "Invalid or expired OTP");
+    }
+
+    // Check if the OTP is already verified
+
+    if (otpToken.verified) {
+        throw new ApiError(httpStatus.UNAUTHORIZED, "OTP has already been used");
     }
 
     // Check if the OTP is expired
@@ -150,15 +160,49 @@ const verifyOTP = async (userId: string, otp: string): Promise<{ message: string
         throw new ApiError(httpStatus.UNAUTHORIZED, "Invalid OTP");
     }
 
-    // If valid, delete the OTP token
-    await OTPToken.deleteOne({ _id: otpToken._id });
+    // Mark the OTP as verified
+
+    otpToken.verified = true;
+    await otpToken.save();
 
     return { message: "OTP verified successfully" };
-}
+};
+
+const resetPassword = async (email: string, newPassword: string): Promise<{ message: string }> => {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+    }
+
+    // check user completed forgot password process
+
+    const otpToken = await OTPToken.findOne({ userId: user._id });
+
+    if (!otpToken) {
+        throw new ApiError(httpStatus.UNAUTHORIZED, "You need to verify your OTP first");
+    }
+
+    // check if the otp is verified
+
+    if (!otpToken.verified) {
+        throw new ApiError(httpStatus.UNAUTHORIZED, "You need to verify your OTP first");
+    }
+
+    await OTPToken.deleteOne({ _id: otpToken._id });
+
+    user.password = newPassword;
+
+    await user.save();
+
+    return { message: "Password reset successfully" };
+};
 
 export const authService = {
     registerUserIntoDB,
     loginUser,
     forgotPassword,
     verifyOTP,
+    resetPassword,
 };

@@ -58,10 +58,9 @@ const forgotPassword = asyncHandler(async (req, res) => {
 });
 
 const verifyOTP = asyncHandler(async (req, res) => {
-    const { otp } = req.body;
-    const {_id} = req.user; 
+    const { otp, email } = req.body;
 
-    const result = await authService.verifyOTP(_id, otp);
+    const result = await authService.verifyOTP(email, otp);
 
     if (!result) {
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to verify OTP");
@@ -76,9 +75,28 @@ const verifyOTP = asyncHandler(async (req, res) => {
     );
 });
 
+const resetPassword = asyncHandler(async (req, res) => {
+    const { newPassword, email } = req.body;
+
+    const result = await authService.resetPassword(email, newPassword);
+
+    if (!result) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to reset password");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Password reset successfully",
+            data: null,
+        }),
+    );
+});
+
 export const AuthControllers = {
     createUser,
     loginUser,
     forgotPassword,
-    verifyOTP
+    verifyOTP,
+    resetPassword,
 };

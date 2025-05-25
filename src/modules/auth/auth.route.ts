@@ -4,10 +4,10 @@ import requestValidator from "../../middleware/request-validator";
 import {
     forgotPasswordValidationSchema,
     optVerificationValidationSchema,
+    resetPasswordValidationSchema,
     userLoginValidationSchema,
     userRegistrationValidationSchema,
 } from "./auth.validation";
-import auth from "../../middleware/auth";
 
 const router = Router();
 
@@ -35,9 +35,16 @@ router.post(
 
 router.post(
     "/verify-otp",
-    auth,
     requestValidator(optVerificationValidationSchema),
     AuthControllers.verifyOTP,
+);
+
+// reset password routes
+
+router.post(
+    "/reset-password",
+    requestValidator(resetPasswordValidationSchema),
+    AuthControllers.resetPassword,
 );
 
 export const AuthRoutes = router;
