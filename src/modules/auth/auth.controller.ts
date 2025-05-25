@@ -39,7 +39,26 @@ const loginUser = asyncHandler(async (req, res) => {
     );
 });
 
+const forgotPassword = asyncHandler(async (req, res) => {
+    const { email } = req.body;
+
+    const result = await authService.forgotPassword(email);
+
+    if (!result) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to send OTP");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "OTP sent successfully to your email",
+            data: null,
+        }),
+    );
+});
+
 export const AuthControllers = {
     createUser,
     loginUser,
+    forgotPassword,
 };

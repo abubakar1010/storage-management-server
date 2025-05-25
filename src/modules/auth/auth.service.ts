@@ -5,6 +5,9 @@ import { IUserLogin, IUserRegistration } from "./auth.interface";
 import httpStatus from "http-status";
 import { GenerateToken } from "./auth.utils";
 import { SignOptions } from "jsonwebtoken";
+import { GenerateOTP, otpEmailTemplate } from "../otpToken/otpToken.utils";
+import { sendEmail } from "../../utils/SendEmail";
+import { OTPToken } from "../otpToken/otpToken.model";
 
 const registerUserIntoDB = async (
     userData: IUserRegistration,
@@ -78,7 +81,55 @@ const loginUser = async (
     return data;
 };
 
+const forgotPassword = async (email: string) => {
+    // checking if the user is exist
+    const user = await User.findOne({ email });
+
+    // if user does not exist then throw error
+
+    if (!user) {
+        throw new ApiError(httpStatus.NOT_FOUND, "User not found with this email!");
+    }
+
+    const otp = GenerateOTP();
+
+    if (!otp) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to generate OTP");
+    }
+
+    // create OTP token document
+
+    // data
+
+    const newOtp = {
+        userId: user._id,
+        otp,
+        expiresAt: new Date(Date.now() + 10 * 60 * 1000), // OTP valid for 10 minutes
+    };
+
+    const otpToken = await OTPToken.create(newOtp);
+
+    if (!otpToken) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to create new OTP entry");
+    }
+
+    // Send OTP to user's email
+
+    const info = await sendEmail(email, "Your OTP Code", otpEmailTemplate(otp, user.username));
+
+    // console.log("info", info);
+
+    if (!info || !info.response.includes("OK")) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to send OTP email");
+    }
+
+    return {
+        message: "OTP sent to your email successfully",
+    };
+};
+
 export const authService = {
     registerUserIntoDB,
     loginUser,
+    forgotPassword,
 };

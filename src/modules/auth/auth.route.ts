@@ -1,7 +1,11 @@
 import { Router } from "express";
 import { AuthControllers } from "./auth.controller";
 import requestValidator from "../../middleware/request-validator";
-import { userLoginValidationSchema, userRegistrationValidationSchema } from "./auth.validation";
+import {
+    forgotPasswordValidationSchema,
+    userLoginValidationSchema,
+    userRegistrationValidationSchema,
+} from "./auth.validation";
 
 const router = Router();
 
@@ -16,5 +20,13 @@ router.post(
 // User login routes
 
 router.post("/login-user", requestValidator(userLoginValidationSchema), AuthControllers.loginUser);
+
+// forgot password routes
+
+router.post(
+    "/forgot-password",
+    requestValidator(forgotPasswordValidationSchema),
+    AuthControllers.forgotPassword,
+);
 
 export const AuthRoutes = router;
