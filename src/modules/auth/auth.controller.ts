@@ -23,6 +23,23 @@ const createUser = asyncHandler(async (req, res) => {
     );
 });
 
+const loginUser = asyncHandler(async (req, res) => {
+    const result = await authService.loginUser(req.body);
+
+    if (!result) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "User login failed");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "User is logged in successfully!",
+            data: result,
+        }),
+    );
+});
+
 export const AuthControllers = {
     createUser,
+    loginUser,
 };
