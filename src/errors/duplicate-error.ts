@@ -1,21 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { TErrorSources, TGenericErrorResponse } from "../types/error";
 
-const handleDuplicateError = (err: unknown): TGenericErrorResponse => {
-    const match = (err as { message: string }).message.match(/"([^"]*)"/);
-
-    const extractedMessage = match && match[1];
+const handleDuplicateError = (err: any): TGenericErrorResponse => {
+    const duplicatedField = Object.keys(err.keyPattern || {})[0];
+    const duplicatedValue = err.keyValue?.[duplicatedField] ?? "unknown";
 
     const errorSources: TErrorSources = [
         {
-            path: "",
-            message: `${extractedMessage} is already exists`,
+            path: duplicatedField,
+            message: `${duplicatedField} '${duplicatedValue}' already exists.`,
         },
     ];
 
-    const statusCode = 400;
-
     return {
-        statusCode,
+        statusCode: 409,
         message: "Oops! This value is already taken. Try something different.",
         errorSources,
     };
