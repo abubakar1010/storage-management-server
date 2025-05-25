@@ -14,7 +14,7 @@ export const userRegistrationValidationSchema = z
         confirmPassword: z.string(),
     })
     .refine((data) => data.password === data.confirmPassword, {
-        message: "",
+        message: "password and confirm password must match",
         path: ["confirmPassword"],
     });
 

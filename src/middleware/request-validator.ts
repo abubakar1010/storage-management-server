@@ -1,8 +1,8 @@
 import { RequestHandler } from "express";
-import { AnyZodObject } from "zod";
+import { ZodTypeAny } from "zod";
 import asyncHandler from "../utils/asyncHandler";
 
-const requestValidator = (schema: AnyZodObject): RequestHandler => {
+const requestValidator = (schema: ZodTypeAny): RequestHandler => {
     return asyncHandler(async (req, res, next) => {
         await schema.parseAsync(req.body);
         next();
