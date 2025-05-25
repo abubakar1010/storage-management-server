@@ -8,6 +8,7 @@ import { SignOptions } from "jsonwebtoken";
 import { GenerateOTP, otpEmailTemplate } from "../otpToken/otpToken.utils";
 import { sendEmail } from "../../utils/SendEmail";
 import { OTPToken } from "../otpToken/otpToken.model";
+import bcrypt from "bcrypt";
 
 const registerUserIntoDB = async (
     userData: IUserRegistration,
@@ -81,7 +82,7 @@ const loginUser = async (
     return data;
 };
 
-const forgotPassword = async (email: string) => {
+const forgotPassword = async (email: string): Promise<{ message: string }> => {
     // checking if the user is exist
     const user = await User.findOne({ email });
 
@@ -128,8 +129,36 @@ const forgotPassword = async (email: string) => {
     };
 };
 
+const verifyOTP = async (userId: string, otp: string): Promise<{ message: string }> => {
+    // Find the OTP token for the user
+    const otpToken = await OTPToken.findOne({ userId });
+
+    if (!otpToken) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Invalid or expired OTP");
+    }
+
+    // Check if the OTP is expired
+    if (otpToken.expiresAt < new Date()) {
+        throw new ApiError(httpStatus.UNAUTHORIZED, "OTP has expired");
+    }
+
+    // Check if the OTP matches
+
+    const isOTPValid = await bcrypt.compare(otp, otpToken.otp);
+
+    if (!isOTPValid) {
+        throw new ApiError(httpStatus.UNAUTHORIZED, "Invalid OTP");
+    }
+
+    // If valid, delete the OTP token
+    await OTPToken.deleteOne({ _id: otpToken._id });
+
+    return { message: "OTP verified successfully" };
+}
+
 export const authService = {
     registerUserIntoDB,
     loginUser,
     forgotPassword,
+    verifyOTP,
 };

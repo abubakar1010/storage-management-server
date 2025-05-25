@@ -26,3 +26,7 @@ export const userLoginValidationSchema = z.object({
 export const forgotPasswordValidationSchema = z.object({
     email: z.string().email("Invalid email address"),
 });
+
+export const optVerificationValidationSchema = z.object({
+    otp: z.string().length(6, "OTP must be exactly 6 characters long"),
+});

@@ -57,8 +57,28 @@ const forgotPassword = asyncHandler(async (req, res) => {
     );
 });
 
+const verifyOTP = asyncHandler(async (req, res) => {
+    const { otp } = req.body;
+    const {_id} = req.user; 
+
+    const result = await authService.verifyOTP(_id, otp);
+
+    if (!result) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to verify OTP");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "OTP verified successfully",
+            data: null,
+        }),
+    );
+});
+
 export const AuthControllers = {
     createUser,
     loginUser,
     forgotPassword,
+    verifyOTP
 };
