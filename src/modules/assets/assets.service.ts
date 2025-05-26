@@ -18,7 +18,7 @@ const insertAsset = async (uploadData: IUploadAsset): Promise<IUploadedAssetResp
     // check if the asset already exist
 
     const existing = await Asset.findOne({ userId, title: fileName, category });
-    
+
     if (existing) {
         throw new ApiError(httpStatus.CONFLICT, "A file with this name already exists");
     }
@@ -58,6 +58,7 @@ const insertAsset = async (uploadData: IUploadAsset): Promise<IUploadedAssetResp
     await user.save();
 
     return {
+        assetId: newAsset._id,
         title: newAsset.title,
         category: newAsset.category,
         url: newAsset.url,
@@ -66,6 +67,36 @@ const insertAsset = async (uploadData: IUploadAsset): Promise<IUploadedAssetResp
     };
 };
 
+const addToFavorite = async (userId: string, assetId: string): Promise<IUploadedAssetResponse> => {
+    // check if user exist
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    // check if asset exist
+    const asset = await Asset.findById(assetId);
+
+    if (!asset) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown asset");
+    }
+
+    // Add asset to user's favorites
+    await User.updateOne({ _id: userId }, { $addToSet: { favorite: assetId } });
+
+    return {
+        assetId: asset._id,
+        title: asset.title,
+        category: asset.category,
+        url: asset.url,
+        size: formatBytes(asset.size),
+        createdAt: asset.createdAt,
+    };
+};
+
 export const assetService = {
     insertAsset,
+    addToFavorite,
 };

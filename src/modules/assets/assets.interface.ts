@@ -20,6 +20,7 @@ export interface IUploadAsset {
 }
 
 export interface IUploadedAssetResponse {
+    assetId: Types.ObjectId;
     title: string;
     category: string;
     url: string;

@@ -26,7 +26,7 @@ const insertAsset = asyncHandler(async (req, res) => {
         throw new ApiError(httpStatus.BAD_REQUEST, "File is required");
     }
 
-     const sanitizedFileName = req.file.originalname.replace(/[^a-zA-Z0-9_.-]/g, "_");
+    const sanitizedFileName = req.file.originalname.replace(/[^a-zA-Z0-9_.-]/g, "_");
 
     const uploadData = {
         userId: _id,
@@ -50,6 +50,26 @@ const insertAsset = asyncHandler(async (req, res) => {
     );
 });
 
+const addToFavorite = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { assetId } = req.body;
+
+    const result = await assetService.addToFavorite(_id, assetId);
+
+    if (!result) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to add asset to favorites");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Asset added to favorites successfully",
+            data: result,
+        }),
+    );
+});
+
 export const AssetControllers = {
     insertAsset,
+    addToFavorite,
 };
