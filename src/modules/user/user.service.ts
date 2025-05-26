@@ -7,7 +7,7 @@ import { IStorageOverviewResponse } from "./user.interface";
 import { User } from "./user.model";
 import httpStatus from "http-status";
 import bcrypt from "bcrypt";
-import { IAssetResponse, IGenericResponse } from "../assets/assets.interface";
+import { IAsset, IAssetResponse, IGenericResponse } from "../assets/assets.interface";
 
 const changePassword = async (
     userId: string,
@@ -201,6 +201,38 @@ const addAssetToPrivate = async (
     };
 };
 
+const previewPrivateAssets = async (
+    userId: string,
+    secretKey: string,
+): Promise<IAssetResponse[]> => {
+    const user = await User.findById(userId).populate("private");
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    if (user.private.length <= 0) {
+        throw new ApiError(httpStatus.NOT_FOUND, "You haven't any asset as private");
+    }
+
+    const isValidSecretKey = await bcrypt.compare(secretKey, user.secretKey);
+
+    if (!isValidSecretKey) {
+        throw new ApiError(httpStatus.FORBIDDEN, "Invalid secret key");
+    }
+
+    const assets = user.private as unknown as IAsset[];
+
+    return assets.map((asset) => ({
+        assetId: asset._id,
+        title: asset.title,
+        category: asset.category,
+        url: asset.url,
+        size: formatBytes(asset.size),
+        createdAt: asset.createdAt,
+    }));
+};
+
 export const userService = {
     changePassword,
     changeUsername,
@@ -208,4 +240,5 @@ export const userService = {
     retrieveRecentAssets,
     setSecretKey,
     addAssetToPrivate,
+    previewPrivateAssets,
 };

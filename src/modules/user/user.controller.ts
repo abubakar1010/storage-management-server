@@ -127,11 +127,27 @@ const addAssetToPrivate = asyncHandler(async (req, res) => {
     );
 });
 
+const previewPrivateAssets = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { secretKey } = req.body;
+
+    const assets = await userService.previewPrivateAssets(_id, secretKey);
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Private Assets retrieved successfully",
+            data: assets,
+        }),
+    );
+});
+
 export const UserControllers = {
     changePassword,
     changeUsername,
     storageOverview,
     retrieveRecentAssets,
     setSecretKey,
-    addAssetToPrivate
+    addAssetToPrivate,
+    previewPrivateAssets,
 };

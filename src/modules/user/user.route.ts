@@ -55,4 +55,13 @@ router.post(
     UserControllers.addAssetToPrivate,
 );
 
+// preview private assets
+
+router.get(
+    "/preview-private-assets",
+    auth,
+    requestValidator(setSecretKeyValidationSchema),
+    UserControllers.previewPrivateAssets,
+);
+
 export const UserRoutes = router;
