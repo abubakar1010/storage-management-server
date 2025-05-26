@@ -31,3 +31,28 @@ export interface UserModel extends Model<IUser> {
     //if passwords are matched
     isPasswordMatched(password: string, hashedPassword: string): Promise<boolean>;
 }
+
+
+export interface IStorageOverviewResponse {
+    storage: {
+        totalStorage: string;
+        usagesStorage: string;
+        availableStorage: string;
+    },
+    folder:{
+        totalItem: number;
+        totalSize: string;
+    },
+    notes: {
+        totalItem: number;
+        totalSize: string;
+    },
+    images: {
+        totalItem: number;
+        totalSize: string;
+    },
+    pdfs: {
+        totalItem: number;
+        totalSize: string;
+    }
+}

@@ -1,4 +1,7 @@
 import ApiError from "../../utils/ApiError";
+import { Asset } from "../assets/assets.model";
+import { formatBytes } from "../assets/assets.utils";
+import { IStorageOverviewResponse } from "./user.interface";
 import { User } from "./user.model";
 import httpStatus from "http-status";
 
@@ -47,7 +50,58 @@ const changeUsername = async (
     };
 };
 
+const storageOverview = async (userId: string): Promise<IStorageOverviewResponse> => {
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
+    }
+
+    const assets = await Asset.aggregate([
+        { $match: { userId: user._id } },
+        {
+            $group: {
+                _id: "$category",
+                totalSize: { $sum: "$size" },
+                totalItem: { $sum: 1 },
+            },
+        },
+    ]);
+
+    const storage = {
+        totalStorage: formatBytes(user.storage.totalStorage),
+        usagesStorage: formatBytes(user.storage.usagesStorage),
+        availableStorage: formatBytes(user.storage.availableStorage),
+    };
+
+    const notes = assets.find((item) => item._id === "notes") || { totalItem: 0, totalSize: 0 };
+    const images = assets.find((item) => item._id === "images") || { totalItem: 0, totalSize: 0 };
+    const pdfs = assets.find((item) => item._id === "pdfs") || { totalItem: 0, totalSize: 0 };
+
+    return {
+        storage,
+        // TODO:Work on folder later
+        folder: {
+            totalItem: 0,
+            totalSize: "0 B",
+        },
+        notes: {
+            totalItem: notes.totalItem,
+            totalSize: formatBytes(notes.totalSize),
+        },
+        images: {
+            totalItem: images.totalItem,
+            totalSize: formatBytes(images.totalSize),
+        },
+        pdfs: {
+            totalItem: pdfs.totalItem,
+            totalSize: formatBytes(pdfs.totalSize),
+        },
+    };
+};
+
 export const userService = {
     changePassword,
-    changeUsername
+    changeUsername,
+    storageOverview,
 };

@@ -23,4 +23,14 @@ router.post(
     requestValidator(changeUsernameValidationSchema),
     UserControllers.changeUsername,
 );
+
+// retrieve storage overview route
+
+router.get(
+    "/storage-overview",
+    auth,
+    UserControllers.storageOverview,
+);
+
+
 export const UserRoutes = router;
