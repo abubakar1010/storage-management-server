@@ -93,24 +93,6 @@ const resetPassword = asyncHandler(async (req, res) => {
     );
 });
 
-const changePassword = asyncHandler(async (req, res) => {
-    const { _id } = req.user; 
-    const { currentPassword, newPassword } = req.body;
-    
-    const result = await authService.changePassword(_id, currentPassword, newPassword);
-
-    if (!result) {
-        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to change password");
-    }
-
-    res.status(httpStatus.OK).json(
-        new ApiResponse({
-            statusCode: httpStatus.OK,
-            message: "Password changed successfully",
-            data: null,
-        }),
-    );
-});
 
 export const AuthControllers = {
     createUser,
@@ -118,5 +100,4 @@ export const AuthControllers = {
     forgotPassword,
     verifyOTP,
     resetPassword,
-    changePassword,
 };

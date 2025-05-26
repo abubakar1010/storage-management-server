@@ -32,17 +32,19 @@ export const optVerificationValidationSchema = z.object({
     email: z.string().email("Invalid email address"),
 });
 
-export const resetPasswordValidationSchema = z.object({
-    email: z.string().email("Invalid email address"),
-    newPassword: z
-        .string()
-        .min(6, "Password must be at least 6 characters long")
-        .regex(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/,
-            "Password must contain uppercase, lowercase, number, and symbol",
-        ),
-    confirmNewPassword: z.string(),
-}).refine((data) => data.newPassword === data.confirmNewPassword, {
-    message: "new password and confirm new password must match",
-    path: ["confirmNewPassword"],
-});
+export const resetPasswordValidationSchema = z
+    .object({
+        email: z.string().email("Invalid email address"),
+        newPassword: z
+            .string()
+            .min(6, "Password must be at least 6 characters long")
+            .regex(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/,
+                "Password must contain uppercase, lowercase, number, and symbol",
+            ),
+        confirmNewPassword: z.string(),
+    })
+    .refine((data) => data.newPassword === data.confirmNewPassword, {
+        message: "new password and confirm new password must match",
+        path: ["confirmNewPassword"],
+    });

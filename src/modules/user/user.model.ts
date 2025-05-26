@@ -50,7 +50,7 @@ const UserSchema = new Schema<IUser>(
             required: true,
             trim: true,
             lowercase: true,
-            unique: true
+            unique: true,
         },
         email: {
             type: String,
@@ -120,6 +120,7 @@ const UserSchema = new Schema<IUser>(
 );
 
 UserSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) return next();
     const user = this;
     user.password = await bcrypt.hash(user.password, Number(config.bcrypt_salt_rounds));
     next();
