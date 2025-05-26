@@ -8,7 +8,10 @@ export const assetActionValidationSchema = z.object({
 });
 
 export const renameAssetValidationSchema = z.object({
-    assetId: z.string().nonempty("Asset ID is required"),
+    assetId: z
+        .string()
+        .nonempty("Asset ID is required")
+        .regex(/^[a-f\d]{24}$/i, "Invalid Asset ID format"),
     newTitle: z
         .string()
         .min(1, "New title is required")

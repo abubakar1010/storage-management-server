@@ -42,6 +42,42 @@ const createFolder = async (
     };
 };
 
+const previewFolder = async (userId: string, folderId: string) => {
+    const user = await User.findById(userId);
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    const folder = await Folder.findById(folderId);
+    if (!folder) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Folder not found");
+    }
+
+    if (folder.userId.toString() !== userId) {
+        throw new ApiError(
+            httpStatus.FORBIDDEN,
+            "You do not have permission to preview this folder",
+        );
+    }
+
+    // populate all assets
+
+    await Folder.findById(folderId).populate("assets");
+
+    // get child folders
+
+    const childFolders = await Folder.find({ parentId: folderId });
+
+    return {
+        folderId: folder._id,
+        name: folder.name,
+        parentId: folder.parentId,
+        assets: folder.assets,
+        childFolders,
+    };
+};
+
 export const folderService = {
     createFolder,
+    previewFolder,
 };

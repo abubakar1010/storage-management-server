@@ -15,4 +15,12 @@ router.post(
     FolderControllers.createFolder,
 );
 
+// preview folder route
+
+router.get(
+    "/preview-folder/:folderId",
+    auth,
+    FolderControllers.previewFolder,
+);
+
 export const FolderRoutes = router;

@@ -23,6 +23,30 @@ const createFolder = asyncHandler(async (req, res) => {
     );
 });
 
+const previewFolder = asyncHandler(async (req, res) => {
+    const { _id: userId } = req.user;
+    const { folderId } = req.params;
+
+    if (!folderId || !/^[a-f\d]{24}$/i.test(folderId)) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid folder ID format");
+    }
+
+    const result = await folderService.previewFolder(userId, folderId);
+
+    if (!result) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Folder not found");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Folder preview retrieved successfully",
+            data: result,
+        }),
+    );
+});
+
 export const FolderControllers = {
     createFolder,
+    previewFolder,
 };
