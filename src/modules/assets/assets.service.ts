@@ -4,7 +4,7 @@ import httpStatus from "http-status";
 import { IGenericResponse, IUploadAsset, IUploadedAssetResponse } from "./assets.interface";
 import { uploadAssets } from "../../utils/UploadAssets";
 import { Asset } from "./assets.model";
-import { formatBytes } from "./assets.utils";
+import { formatBytes, sanitizeFileName } from "./assets.utils";
 
 const insertAsset = async (uploadData: IUploadAsset): Promise<IUploadedAssetResponse> => {
     const { userId, fileName, filePath, category } = uploadData;
@@ -145,8 +145,53 @@ const addToFavorite = async (userId: string, assetId: string): Promise<IUploaded
     };
 };
 
+const renameAsset = async (
+    userId: string,
+    assetId: string,
+    newTitle: string,
+): Promise<IUploadedAssetResponse> => {
+    // check if user exist
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    // check if asset exist
+    const asset = await Asset.findById(assetId);
+    if (!asset) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown asset");
+    }
+    // check if asset belongs to user
+    if (asset.userId.toString() !== userId) {
+        throw new ApiError(httpStatus.FORBIDDEN, "You do not have permission to rename this asset");
+    }
+    // check if new title is already used by the user
+    const isTitleUsed = await Asset.findOne({ userId, title: newTitle });
+    if (isTitleUsed) {
+        throw new ApiError(httpStatus.CONFLICT, "Title is already in use");
+    }
+
+    // sanitize new title
+    const sanitizedTitle = sanitizeFileName(newTitle, asset.title);
+
+    // update asset title
+    asset.title = sanitizedTitle;
+    await asset.save();
+
+    return {
+        assetId: asset._id,
+        title: asset.title,
+        category: asset.category,
+        url: asset.url,
+        size: formatBytes(asset.size),
+        createdAt: asset.createdAt,
+    };
+};
+
 export const assetService = {
     insertAsset,
     addToFavorite,
     deleteAsset,
+    renameAsset,
 };

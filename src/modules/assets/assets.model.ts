@@ -29,6 +29,7 @@ const assetSchema = new Schema<IAsset>(
         folder: {
             type: Schema.Types.ObjectId,
             ref: "Folder",
+            default: null,
         },
 
         isDeleted: {

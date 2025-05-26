@@ -88,8 +88,28 @@ const addToFavorite = asyncHandler(async (req, res) => {
     );
 });
 
+const renameAsset = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { assetId, newTitle } = req.body;
+
+    const result = await assetService.renameAsset(_id, assetId, newTitle);
+
+    if (!result) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to rename asset");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Asset renamed successfully",
+            data: result,
+        }),
+    );
+});
+
 export const AssetControllers = {
     insertAsset,
     addToFavorite,
     deleteAsset,
+    renameAsset,
 };
