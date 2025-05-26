@@ -1,4 +1,5 @@
 import ApiError from "../../utils/ApiError";
+import { IUploadedAssetResponse } from "../assets/assets.interface";
 import { Asset } from "../assets/assets.model";
 import { formatBytes } from "../assets/assets.utils";
 import { IStorageOverviewResponse } from "./user.interface";
@@ -100,8 +101,28 @@ const storageOverview = async (userId: string): Promise<IStorageOverviewResponse
     };
 };
 
+const retrieveRecentAssets = async (
+    userId: string,
+    limit: number,
+): Promise<IUploadedAssetResponse[]> => {
+
+    const assets = await Asset.find({ userId })
+        .sort({ createdAt: -1 })
+        .limit(limit)
+        .select("title url size category createdAt");
+
+    return assets.map((asset) => ({
+        title: asset.title,
+        url: asset.url,
+        size: formatBytes(asset.size),
+        category: asset.category,
+        createdAt: asset.createdAt,
+    }));
+};
+
 export const userService = {
     changePassword,
     changeUsername,
     storageOverview,
+    retrieveRecentAssets,
 };

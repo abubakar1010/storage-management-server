@@ -32,5 +32,13 @@ router.get(
     UserControllers.storageOverview,
 );
 
+// retrieve recent assets route
+
+router.get(
+    "/recent-assets",
+    auth,
+    UserControllers.retrieveRecentAssets,
+);
+
 
 export const UserRoutes = router;

@@ -62,8 +62,34 @@ const storageOverview = asyncHandler(async (req, res) => {
     );
 });
 
+const retrieveRecentAssets = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { limit = 5 } = req.query;
+
+    // Validate limit to be a number
+
+    if (isNaN(Number(limit)) || Number(limit) <= 0) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid limit parameter");
+    }
+
+    const result = await userService.retrieveRecentAssets(_id, Number(limit));
+
+    if (!result) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to retrieve recent assets");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Recent assets retrieved successfully",
+            data: result,
+        }),
+    );
+});
+
 export const UserControllers = {
     changePassword,
     changeUsername,
     storageOverview,
+    retrieveRecentAssets,
 };
