@@ -36,7 +36,7 @@ export const setSecretKeyValidationSchema = z.object({
         .max(64, "Secret key must not exceed 64 characters"),
 });
 
-export const addToPrivateValidationSchema = z.object({
+export const privateAssetActionValidationSchema = z.object({
     secretKey: z
         .string()
         .trim()

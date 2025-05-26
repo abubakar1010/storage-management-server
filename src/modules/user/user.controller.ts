@@ -164,6 +164,24 @@ const removeAssetFromPrivate = asyncHandler(async (req, res) => {
     );
 });
 
+const deleteUser = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+
+    const result = await userService.deleteUser(_id);
+
+    if (!result) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to delete user");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "User deleted successfully",
+            data: result,
+        }),
+    );
+});
+
 export const UserControllers = {
     changePassword,
     changeUsername,
@@ -173,4 +191,5 @@ export const UserControllers = {
     addAssetToPrivate,
     previewPrivateAssets,
     removeAssetFromPrivate,
+    deleteUser,
 };

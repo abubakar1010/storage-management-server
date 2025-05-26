@@ -272,6 +272,40 @@ const removeAssetFromPrivate = async (
     };
 };
 
+const deleteUser = async (userId: string): Promise<IGenericResponse> => {
+    const user = await User.findById(userId);
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    const session = await User.startSession();
+
+    try {
+        await session.withTransaction(async () => {
+            // Delete user inside transaction
+            await User.findByIdAndDelete(userId, { session });
+
+            // Delete all assets of the user
+            await Asset.deleteMany({ userId }, { session });
+
+            // Remove all user folders
+            await Folder.deleteMany({ userId }, { session });
+        });
+
+        session.endSession();
+
+        return {
+            message: "User deleted successfully",
+            success: true,
+        };
+    } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
+
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to delete user");
+    }
+};
+
 export const userService = {
     changePassword,
     changeUsername,
@@ -280,5 +314,6 @@ export const userService = {
     setSecretKey,
     addAssetToPrivate,
     previewPrivateAssets,
-    removeAssetFromPrivate
+    removeAssetFromPrivate,
+    deleteUser,
 };

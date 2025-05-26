@@ -3,9 +3,9 @@ import { UserControllers } from "./user.controller";
 import auth from "../../middleware/auth";
 import requestValidator from "../../middleware/request-validator";
 import {
-    addToPrivateValidationSchema,
     changePasswordValidationSchema,
     changeUsernameValidationSchema,
+    privateAssetActionValidationSchema,
     setSecretKeyValidationSchema,
 } from "./user.validation";
 
@@ -51,7 +51,7 @@ router.post(
 router.post(
     "/add-to-private",
     auth,
-    requestValidator(addToPrivateValidationSchema),
+    requestValidator(privateAssetActionValidationSchema),
     UserControllers.addAssetToPrivate,
 );
 
@@ -66,6 +66,15 @@ router.get(
 
 // remove asset from private
 
-router.delete("/remove-asset-from-private", auth, UserControllers.removeAssetFromPrivate);
+router.delete(
+    "/remove-asset-from-private",
+    auth,
+    requestValidator(privateAssetActionValidationSchema),
+    UserControllers.removeAssetFromPrivate,
+);
+
+// delete user route
+
+router.delete("/delete-user", auth, UserControllers.deleteUser);
 
 export const UserRoutes = router;
