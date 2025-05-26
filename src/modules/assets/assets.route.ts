@@ -46,4 +46,8 @@ router.get("/preview-assets/:category", auth, AssetControllers.previewAllAssetBy
 
 router.get("/preview-favorite-assets", auth, AssetControllers.previewFavoriteAssets);
 
+// remove asset from favorite
+
+router.delete("/remove-favorite-asset/:assetId", auth, AssetControllers.removeAssetFromFavorite);
+
 export const AssetRoute = router;

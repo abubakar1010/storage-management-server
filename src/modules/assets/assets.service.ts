@@ -256,6 +256,37 @@ const previewFavoriteAssets = async (userId: string): Promise<IAssetResponse[]> 
     }));
 };
 
+const removeAssetFromFavorite = async (
+    userId: string,
+    assetId: string,
+): Promise<IGenericResponse> => {
+    // check if user exist
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    // check if asset exist
+    const asset = await Asset.findById(assetId);
+    if (!asset) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown asset");
+    }
+
+    // check if asset is in user's favorites
+    if (!user.favorite.some((favId) => favId.toString() === assetId)) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Asset is not in your favorites");
+    }
+
+    // Remove asset from user's favorites
+    await User.findByIdAndUpdate(userId, { $pull: { favorite: new Types.ObjectId(assetId) } });
+
+    return {
+        message: "Asset removed from favorites successfully",
+        success: true,
+    };
+};
+
 export const assetService = {
     insertAsset,
     addToFavorite,
@@ -263,4 +294,5 @@ export const assetService = {
     renameAsset,
     previewAllAssetByCategory,
     previewFavoriteAssets,
+    removeAssetFromFavorite,
 };

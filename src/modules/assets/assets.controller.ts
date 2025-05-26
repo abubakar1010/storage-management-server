@@ -142,6 +142,32 @@ const previewFavoriteAssets = asyncHandler(async (req, res) => {
     );
 });
 
+const removeAssetFromFavorite = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { assetId } = req.params;
+
+    if (!assetId || !assetId.match(/^[0-9a-fA-F]{24}$/)) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid asset ID");
+    }
+
+    const result = await assetService.removeAssetFromFavorite(_id, assetId);
+
+    if (!result) {
+        throw new ApiError(
+            httpStatus.INTERNAL_SERVER_ERROR,
+            "Failed to remove asset from favorites",
+        );
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Asset removed from favorites successfully",
+            data: null,
+        }),
+    );
+});
+
 export const AssetControllers = {
     insertAsset,
     addToFavorite,
@@ -149,4 +175,5 @@ export const AssetControllers = {
     renameAsset,
     previewAllAssetByCategory,
     previewFavoriteAssets,
+    removeAssetFromFavorite,
 };
