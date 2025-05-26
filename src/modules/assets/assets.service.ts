@@ -1,0 +1,71 @@
+import ApiError from "../../utils/ApiError";
+import { User } from "../user/user.model";
+import httpStatus from "http-status";
+import { IUploadAsset, IUploadedAssetResponse } from "./assets.interface";
+import { uploadAssets } from "../../utils/UploadAssets";
+import { Asset } from "./assets.model";
+import { formatBytes } from "./assets.utils";
+
+const insertAsset = async (uploadData: IUploadAsset): Promise<IUploadedAssetResponse> => {
+    const { userId, fileName, filePath, category } = uploadData;
+    // Find the user by ID
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
+    }
+
+    // check if the asset already exist
+
+    const existing = await Asset.findOne({ userId, title: fileName, category });
+    
+    if (existing) {
+        throw new ApiError(httpStatus.CONFLICT, "A file with this name already exists");
+    }
+
+    const cloudinaryResponse = await uploadAssets(fileName, filePath);
+
+    if (!cloudinaryResponse) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to upload asset");
+    }
+
+    // check user has enough storage
+
+    if (user.storage.availableStorage < cloudinaryResponse.bytes) {
+        throw new ApiError(httpStatus.FORBIDDEN, "Not enough storage available");
+    }
+
+    // Create the asset object
+
+    const asset = {
+        userId: user._id,
+        category: category,
+        title: fileName,
+        size: cloudinaryResponse.bytes,
+        url: cloudinaryResponse.secure_url,
+    };
+
+    // Save the asset to the user's assets array
+
+    const newAsset = new Asset(asset);
+
+    await newAsset.save();
+
+    // Update the user's storage information
+    user.storage.usagesStorage += newAsset.size;
+    user.storage.availableStorage -= newAsset.size;
+
+    await user.save();
+
+    return {
+        title: newAsset.title,
+        category: newAsset.category,
+        url: newAsset.url,
+        size: formatBytes(newAsset.size),
+        createdAt: newAsset.createdAt,
+    };
+};
+
+export const assetService = {
+    insertAsset,
+};

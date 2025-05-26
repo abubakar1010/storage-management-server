@@ -1,8 +1,7 @@
-import { UploadApiResponse, v2 as cloudinary } from 'cloudinary';
-import fs from 'fs';
-import multer from 'multer';
-import { config } from '../config';
-
+import { UploadApiResponse, v2 as cloudinary } from "cloudinary";
+import fs from "fs";
+import multer from "multer";
+import { config } from "../config";
 
 cloudinary.config({
     cloud_name: config.cloudinary_cloud_name,
@@ -13,33 +12,29 @@ cloudinary.config({
 export const uploadAssets = (
     filename: string,
     path: string,
-): Promise<Record<string, unknown>> => {
+): Promise<{ secure_url: string; bytes: number }> => {
     return new Promise((resolve, reject) => {
-        cloudinary.uploader.upload(
-            path,
-            { public_id: filename.trim() },
-            function (error, result) {
-                if (error) {
-                    reject(error);
+        cloudinary.uploader.upload(path, { public_id: filename.trim() }, function (error, result) {
+            if (error) {
+                reject(error);
+            }
+            resolve(result as UploadApiResponse);
+            // delete a file asynchronously
+            fs.unlink(path, (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("File is deleted.");
                 }
-                resolve(result as UploadApiResponse);
-                // delete a file asynchronously
-                fs.unlink(path, (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log('File is deleted.');
-                    }
-                });
-            },
-        );
+            });
+        });
     });
 };
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-         const uploadPath = "/tmp/uploads/";
-        fs.mkdirSync(uploadPath, { recursive: true }); 
+        const uploadPath = "/tmp/uploads/";
+        fs.mkdirSync(uploadPath, { recursive: true });
         cb(null, uploadPath);
     },
     filename: function (req, file, cb) {

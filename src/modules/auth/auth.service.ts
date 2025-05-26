@@ -27,9 +27,9 @@ const registerUserIntoDB = async (
 
     const newUser = new User(userData);
 
-    newUser.storage.totalStorage = 15 * 1000; // 15 MB
+    newUser.storage.totalStorage = 15 * 1024 * 1024 * 1024 // 15 GB in bytes
 
-    newUser.storage.availableStorage = 15 * 1000; // 15 MB
+    newUser.storage.availableStorage = 15 * 1024 * 1024 * 1024; // 15 GB in bytes
 
     await newUser.save();
 

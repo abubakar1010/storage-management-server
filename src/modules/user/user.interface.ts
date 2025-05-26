@@ -18,9 +18,6 @@ export interface IUser {
     email: string;
     password: string;
     storage: IStorage;
-    notes: AssetID[];
-    images: AssetID[];
-    pdfs: AssetID[];
     folders: IFolder[];
     favorite: AssetID[];
     private: AssetID[];

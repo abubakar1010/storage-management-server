@@ -68,25 +68,6 @@ const UserSchema = new Schema<IUser>(
             type: StorageSchema,
             default: {},
         },
-
-        notes: [
-            {
-                type: String,
-                default: [],
-            },
-        ],
-        images: [
-            {
-                type: String,
-                default: [],
-            },
-        ],
-        pdfs: [
-            {
-                type: String,
-                default: [],
-            },
-        ],
         folders: {
             type: [FolderSchema],
             default: [],
@@ -94,13 +75,15 @@ const UserSchema = new Schema<IUser>(
 
         favorite: [
             {
-                type: String,
+                type: Schema.Types.ObjectId,
+                ref: "Asset",
                 default: [],
             },
         ],
         private: [
             {
-                type: String,
+                type: Schema.Types.ObjectId,
+                ref: "Asset",
                 default: [],
             },
         ],
