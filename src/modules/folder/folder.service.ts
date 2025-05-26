@@ -5,7 +5,6 @@ import { Folder } from "./folder.model";
 import { ICreateFolderResponse } from "./folder.interface";
 import { Types } from "mongoose";
 import { formatBytes } from "../assets/assets.utils";
-import { create } from "domain";
 
 const createFolder = async (
     userId: string,
@@ -45,7 +44,23 @@ const createFolder = async (
     };
 };
 
-const previewFolder = async (userId: string, folderId: string) => {
+const previewFolder = async (
+    userId: string,
+    folderId: string,
+): Promise<{
+    folderId: Types.ObjectId;
+    name: string;
+    parentId: Types.ObjectId | undefined | null;
+    size: number;
+    assets: Types.ObjectId[];
+    childFolders: {
+        _id: Types.ObjectId;
+        size: number;
+        name: string;
+        parentId?: Types.ObjectId | null;
+        createdAt?: Date;
+    }[];
+}> => {
     const user = await User.findById(userId);
     if (!user) {
         throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
@@ -69,9 +84,9 @@ const previewFolder = async (userId: string, folderId: string) => {
 
     // get child folders
 
-    const childFolders = await Folder.find({ parentId: folderId }).select(
-        "_id size name parentId createdAt",
-    );
+    const childFolders = await Folder.find({ parentId: folderId })
+        .select("_id size name parentId createdAt -__v")
+        .lean();
 
     return {
         folderId: folder._id,

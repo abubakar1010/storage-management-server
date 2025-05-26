@@ -120,7 +120,7 @@ const deleteAsset = async (userId: string, assetId: string): Promise<IGenericRes
             message: "Asset deleted successfully",
             success: true,
         };
-    } catch (error) {
+    } catch{
         await session.abortTransaction();
         session.endSession();
 

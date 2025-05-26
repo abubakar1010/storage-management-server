@@ -298,7 +298,7 @@ const deleteUser = async (userId: string): Promise<IGenericResponse> => {
             message: "User deleted successfully",
             success: true,
         };
-    } catch (error) {
+    } catch {
         await session.abortTransaction();
         session.endSession();
 
