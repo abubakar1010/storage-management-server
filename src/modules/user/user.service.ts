@@ -3,6 +3,7 @@ import { IUploadedAssetResponse } from "../assets/assets.interface";
 import { Asset } from "../assets/assets.model";
 import { formatBytes } from "../assets/assets.utils";
 import { IPasswordOperationResponse } from "../auth/auth.interface";
+import { Folder } from "../folder/folder.model";
 import { IStorageOverviewResponse } from "./user.interface";
 import { User } from "./user.model";
 import httpStatus from "http-status";
@@ -80,12 +81,27 @@ const storageOverview = async (userId: string): Promise<IStorageOverviewResponse
     const images = assets.find((item) => item._id === "images") || { totalItem: 0, totalSize: 0 };
     const pdfs = assets.find((item) => item._id === "pdfs") || { totalItem: 0, totalSize: 0 };
 
+    // folder overview
+
+    const folderStats = await Folder.aggregate([
+        { $match: { userId: user._id } },
+        {
+            $group: {
+                _id: null,
+                totalSize: { $sum: "$size" },
+                totalItem: { $sum: 1 },
+            },
+        },
+    ]);
+
+    const folderOverview = folderStats[0] || { totalSize: 0, totalItem: 0 };
+
     return {
         storage,
-        // TODO:Work on folder later
+
         folder: {
-            totalItem: 0,
-            totalSize: "0 B",
+            totalItem: folderOverview.totalItem,
+            totalSize: formatBytes(folderOverview.totalSize),
         },
         notes: {
             totalItem: notes.totalItem,

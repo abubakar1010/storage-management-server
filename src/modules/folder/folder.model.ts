@@ -17,6 +17,10 @@ const folderSchema = new Schema<IFolder>(
             ref: "Folder", 
             default: null,
         },
+        size: {
+            type: Number,
+            default: 0, 
+        },
         assets: [
             {
                 type: Schema.Types.ObjectId,
