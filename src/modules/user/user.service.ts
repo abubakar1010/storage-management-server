@@ -8,6 +8,7 @@ import { User } from "./user.model";
 import httpStatus from "http-status";
 import bcrypt from "bcrypt";
 import { IAsset, IAssetResponse, IGenericResponse } from "../assets/assets.interface";
+import { Types } from "mongoose";
 
 const changePassword = async (
     userId: string,
@@ -233,6 +234,44 @@ const previewPrivateAssets = async (
     }));
 };
 
+const removeAssetFromPrivate = async (
+    userId: string,
+    assetId: string,
+    secretKey: string,
+): Promise<IGenericResponse> => {
+    // check if user exist
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    const isValidSecretKey = await bcrypt.compare(secretKey, user.secretKey);
+
+    if (!isValidSecretKey) {
+        throw new ApiError(httpStatus.FORBIDDEN, "Invalid secret key");
+    }
+
+    // check if asset exist
+    const asset = await Asset.findById(assetId);
+    if (!asset) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown asset");
+    }
+
+    // check if asset is in user's privates
+    if (!user.private.some((favId) => favId.toString() === assetId)) {
+        throw new ApiError(httpStatus.NOT_FOUND, "Asset is not in your privates");
+    }
+
+    // Remove asset from user's privates
+    await User.findByIdAndUpdate(userId, { $pull: { private: new Types.ObjectId(assetId) } });
+
+    return {
+        message: "Asset removed from privates successfully",
+        success: true,
+    };
+};
+
 export const userService = {
     changePassword,
     changeUsername,
@@ -241,4 +280,5 @@ export const userService = {
     setSecretKey,
     addAssetToPrivate,
     previewPrivateAssets,
+    removeAssetFromPrivate
 };

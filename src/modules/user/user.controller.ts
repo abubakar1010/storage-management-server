@@ -142,6 +142,28 @@ const previewPrivateAssets = asyncHandler(async (req, res) => {
     );
 });
 
+const removeAssetFromPrivate = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { assetId, secretKey } = req.body;
+
+    const result = await userService.removeAssetFromPrivate(_id, assetId, secretKey);
+
+    if (!result) {
+        throw new ApiError(
+            httpStatus.INTERNAL_SERVER_ERROR,
+            "Failed to remove asset from privates",
+        );
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Asset removed from privates successfully",
+            data: null,
+        }),
+    );
+});
+
 export const UserControllers = {
     changePassword,
     changeUsername,
@@ -150,4 +172,5 @@ export const UserControllers = {
     setSecretKey,
     addAssetToPrivate,
     previewPrivateAssets,
+    removeAssetFromPrivate,
 };

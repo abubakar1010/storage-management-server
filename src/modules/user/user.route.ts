@@ -64,4 +64,8 @@ router.get(
     UserControllers.previewPrivateAssets,
 );
 
+// remove asset from private
+
+router.delete("/remove-asset-from-private", auth, UserControllers.removeAssetFromPrivate);
+
 export const UserRoutes = router;
