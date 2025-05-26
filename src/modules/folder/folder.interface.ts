@@ -8,3 +8,8 @@ export interface IFolder  {
     createdAt?: Date;
     updatedAt?: Date;
 };
+
+export interface ICreateFolderResponse {
+    folderId: Types.ObjectId;
+    name: string;
+}

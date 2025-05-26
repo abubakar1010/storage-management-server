@@ -1,7 +1,7 @@
 import { config } from "../../config";
 import ApiError from "../../utils/ApiError";
 import { User } from "../user/user.model";
-import { IUserLogin, IUserRegistration } from "./auth.interface";
+import { IPasswordOperationResponse, IUserLogin, IUserRegistration } from "./auth.interface";
 import httpStatus from "http-status";
 import { GenerateToken } from "./auth.utils";
 import { SignOptions } from "jsonwebtoken";
@@ -27,7 +27,7 @@ const registerUserIntoDB = async (
 
     const newUser = new User(userData);
 
-    newUser.storage.totalStorage = 15 * 1024 * 1024 * 1024 // 15 GB in bytes
+    newUser.storage.totalStorage = 15 * 1024 * 1024 * 1024; // 15 GB in bytes
 
     newUser.storage.availableStorage = 15 * 1024 * 1024 * 1024; // 15 GB in bytes
 
@@ -73,7 +73,7 @@ const loginUser = async (
     }
 
     const data = {
-        id: user._id,
+        _id: user._id,
         username: user.username,
         email: user.email,
         token,
@@ -82,7 +82,7 @@ const loginUser = async (
     return data;
 };
 
-const forgotPassword = async (email: string): Promise<{ message: string }> => {
+const forgotPassword = async (email: string): Promise<IPasswordOperationResponse> => {
     // checking if the user is exist
     const user = await User.findOne({ email });
 
@@ -125,7 +125,7 @@ const forgotPassword = async (email: string): Promise<{ message: string }> => {
     };
 };
 
-const verifyOTP = async (email: string, otp: string): Promise<{ message: string }> => {
+const verifyOTP = async (email: string, otp: string): Promise<IPasswordOperationResponse> => {
     // Find the user by email
 
     const user = await User.findOne({ email });
@@ -168,7 +168,10 @@ const verifyOTP = async (email: string, otp: string): Promise<{ message: string 
     return { message: "OTP verified successfully" };
 };
 
-const resetPassword = async (email: string, newPassword: string): Promise<{ message: string }> => {
+const resetPassword = async (
+    email: string,
+    newPassword: string,
+): Promise<IPasswordOperationResponse> => {
     // Find the user by email
     const user = await User.findOne({ email });
 
@@ -199,11 +202,10 @@ const resetPassword = async (email: string, newPassword: string): Promise<{ mess
     return { message: "Password reset successfully" };
 };
 
-
 export const authService = {
     registerUserIntoDB,
     loginUser,
     forgotPassword,
     verifyOTP,
-    resetPassword
+    resetPassword,
 };

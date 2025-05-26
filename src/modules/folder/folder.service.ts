@@ -2,10 +2,14 @@ import ApiError from "../../utils/ApiError";
 import { User } from "../user/user.model";
 import httpStatus from "http-status";
 import { Folder } from "./folder.model";
+import { ICreateFolderResponse } from "./folder.interface";
 import { Types } from "mongoose";
-import { IFolder } from "./folder.interface";
 
-const createFolder = async (userId: string, folderName: string, parentId: string | null): Promise<IFolder> => {
+const createFolder = async (
+    userId: string,
+    folderName: string,
+    parentId: string | null,
+): Promise<ICreateFolderResponse> => {
     const user = await User.findById(userId);
 
     if (!user) {
@@ -32,7 +36,10 @@ const createFolder = async (userId: string, folderName: string, parentId: string
     });
 
     await folder.save();
-    return folder;
+    return {
+        folderId: folder._id,
+        name: folder.name,
+    };
 };
 
 export const folderService = {

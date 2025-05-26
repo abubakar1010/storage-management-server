@@ -2,6 +2,7 @@ import ApiError from "../../utils/ApiError";
 import { IUploadedAssetResponse } from "../assets/assets.interface";
 import { Asset } from "../assets/assets.model";
 import { formatBytes } from "../assets/assets.utils";
+import { IPasswordOperationResponse } from "../auth/auth.interface";
 import { IStorageOverviewResponse } from "./user.interface";
 import { User } from "./user.model";
 import httpStatus from "http-status";
@@ -10,7 +11,7 @@ const changePassword = async (
     userId: string,
     currentPassword: string,
     newPassword: string,
-): Promise<{ message: string }> => {
+): Promise<IPasswordOperationResponse> => {
     // Find the user by ID
     const user = await User.findById(userId);
 
@@ -105,13 +106,13 @@ const retrieveRecentAssets = async (
     userId: string,
     limit: number,
 ): Promise<IUploadedAssetResponse[]> => {
-
     const assets = await Asset.find({ userId })
         .sort({ createdAt: -1 })
         .limit(limit)
         .select("title url size category createdAt");
 
     return assets.map((asset) => ({
+        assetId: asset._id,
         title: asset.title,
         url: asset.url,
         size: formatBytes(asset.size),
