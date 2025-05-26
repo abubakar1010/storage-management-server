@@ -6,7 +6,7 @@ export interface IAsset {
     category: "notes" | "images" | "pdfs";
     url: string;
     size: number;
-    folder: string;
+    folder: Types.ObjectId;
     isDeleted: boolean;
     createdAt: Date;
     updatedAt: Date;

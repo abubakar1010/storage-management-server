@@ -27,8 +27,8 @@ const assetSchema = new Schema<IAsset>(
             enum: ["notes", "images", "pdfs"],
         },
         folder: {
-            type: String,
-            default: "",
+            type: Schema.Types.ObjectId,
+            ref: "Folder",
         },
 
         isDeleted: {

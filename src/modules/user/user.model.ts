@@ -1,27 +1,8 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import bcrypt from "bcrypt";
 import { Schema, model } from "mongoose";
-import { IFolder, IStorage, IUser, UserModel } from "./user.interface";
+import { IStorage, IUser, UserModel } from "./user.interface";
 import { config } from "../../config";
-
-const FolderSchema = new Schema<IFolder>(
-    {
-        title: {
-            type: String,
-            required: true,
-        },
-
-        assets: [
-            {
-                type: String,
-                required: true,
-            },
-        ],
-    },
-    {
-        _id: false,
-    },
-);
 
 const StorageSchema = new Schema<IStorage>(
     {
@@ -68,10 +49,13 @@ const UserSchema = new Schema<IUser>(
             type: StorageSchema,
             default: {},
         },
-        folders: {
-            type: [FolderSchema],
-            default: [],
-        },
+        folders: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Folder",
+                default: null,
+            },
+        ],
 
         favorite: [
             {

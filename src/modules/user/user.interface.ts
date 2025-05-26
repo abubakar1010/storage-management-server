@@ -1,11 +1,8 @@
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 
 type AssetID = string;
 
-export interface IFolder {
-    title: string;
-    assets: AssetID[];
-}
+
 
 export interface IStorage {
     totalStorage: number;
@@ -18,7 +15,7 @@ export interface IUser {
     email: string;
     password: string;
     storage: IStorage;
-    folders: IFolder[];
+    folders: Types.ObjectId[];
     favorite: AssetID[];
     private: AssetID[];
     secretKey: string;
