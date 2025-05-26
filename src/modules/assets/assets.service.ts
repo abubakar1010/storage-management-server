@@ -6,6 +6,7 @@ import { uploadAssets } from "../../utils/UploadAssets";
 import { Asset } from "./assets.model";
 import { formatBytes, sanitizeFileName } from "./assets.utils";
 import { Folder } from "../folder/folder.model";
+import { Types } from "mongoose";
 
 const insertAsset = async (uploadData: IUploadAsset): Promise<IAssetResponse> => {
     const { userId, fileName, filePath, category } = uploadData;
@@ -84,7 +85,6 @@ const deleteAsset = async (userId: string, assetId: string): Promise<IGenericRes
 
     try {
         await session.withTransaction(async () => {
-
             // Delete asset inside transaction
             await Asset.deleteOne({ _id: assetId }, { session });
 
@@ -126,35 +126,6 @@ const deleteAsset = async (userId: string, assetId: string): Promise<IGenericRes
 
         throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to delete asset");
     }
-};
-
-const addToFavorite = async (userId: string, assetId: string): Promise<IAssetResponse> => {
-    // check if user exist
-
-    const user = await User.findById(userId);
-
-    if (!user) {
-        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
-    }
-
-    // check if asset exist
-    const asset = await Asset.findById(assetId);
-
-    if (!asset) {
-        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown asset");
-    }
-
-    // Add asset to user's favorites
-    await User.updateOne({ _id: userId }, { $addToSet: { favorite: assetId } });
-
-    return {
-        assetId: asset._id,
-        title: asset.title,
-        category: asset.category,
-        url: asset.url,
-        size: formatBytes(asset.size),
-        createdAt: asset.createdAt,
-    };
 };
 
 const renameAsset = async (
@@ -225,6 +196,41 @@ const previewAllAssetByCategory = async (
         size: formatBytes(asset.size),
         createdAt: asset.createdAt,
     }));
+};
+
+const addToFavorite = async (userId: string, assetId: string): Promise<IAssetResponse> => {
+    // check if user exist
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    // check if asset exist
+    const asset = await Asset.findById(assetId);
+
+    if (!asset) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown asset");
+    }
+
+    // check asset already exists in user's favorites
+
+    if (user.favorite.some((favId) => favId.toString() === assetId)) {
+        throw new ApiError(httpStatus.CONFLICT, "Asset is already in your favorites");
+    }
+
+    // Add asset to user's favorites
+    await User.updateOne({ _id: userId }, { $addToSet: { favorite: assetId } });
+
+    return {
+        assetId: asset._id,
+        title: asset.title,
+        category: asset.category,
+        url: asset.url,
+        size: formatBytes(asset.size),
+        createdAt: asset.createdAt,
+    };
 };
 
 const previewFavoriteAssets = async (userId: string): Promise<IAssetResponse[]> => {
