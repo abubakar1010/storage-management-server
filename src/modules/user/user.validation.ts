@@ -27,3 +27,11 @@ export const changeUsernameValidationSchema = z
         message: "new username and confirm new username must match",
         path: ["confirmNewUsername"],
     });
+
+export const setSecretKeyValidationSchema = z.object({
+    secretKey: z
+        .string()
+        .trim()
+        .min(6, "Secret key must be at least 6 characters long")
+        .max(64, "Secret key must not exceed 64 characters"),
+});

@@ -1,5 +1,4 @@
 import ApiError from "../../utils/ApiError";
-import { IUploadedAssetResponse } from "../assets/assets.interface";
 import { Asset } from "../assets/assets.model";
 import { formatBytes } from "../assets/assets.utils";
 import { IPasswordOperationResponse } from "../auth/auth.interface";
@@ -7,6 +6,8 @@ import { Folder } from "../folder/folder.model";
 import { IStorageOverviewResponse } from "./user.interface";
 import { User } from "./user.model";
 import httpStatus from "http-status";
+import bcrypt from "bcrypt";
+import { IAssetResponse, IGenericResponse } from "../assets/assets.interface";
 
 const changePassword = async (
     userId: string,
@@ -118,10 +119,7 @@ const storageOverview = async (userId: string): Promise<IStorageOverviewResponse
     };
 };
 
-const retrieveRecentAssets = async (
-    userId: string,
-    limit: number,
-): Promise<IUploadedAssetResponse[]> => {
+const retrieveRecentAssets = async (userId: string, limit: number): Promise<IAssetResponse[]> => {
     const assets = await Asset.find({ userId })
         .sort({ createdAt: -1 })
         .limit(limit)
@@ -137,9 +135,31 @@ const retrieveRecentAssets = async (
     }));
 };
 
+const setSecretKey = async (userId: string, secretKey: string): Promise<IGenericResponse> => {
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    if (user.secretKey) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Secret key already exists");
+    }
+
+    const hashKey = await bcrypt.hash(secretKey, Number(process.env.BCRYPT_SALT_ROUNDS || 10));
+
+    user.secretKey = hashKey;
+    await user.save();
+    return {
+        message: "Secret key set successfully",
+        success: true,
+    };
+};
+
 export const userService = {
     changePassword,
     changeUsername,
     storageOverview,
     retrieveRecentAssets,
+    setSecretKey,
 };

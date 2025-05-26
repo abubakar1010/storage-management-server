@@ -87,9 +87,31 @@ const retrieveRecentAssets = asyncHandler(async (req, res) => {
     );
 });
 
+// Set secret key for store private assets
+
+const setSecretKey = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { secretKey } = req.body;
+
+    const result = await userService.setSecretKey(_id, secretKey);
+
+    if (!result) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to set secret key");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: result.message || "Secret key set successfully",
+            data: null,
+        }),
+    );
+});
+
 export const UserControllers = {
     changePassword,
     changeUsername,
     storageOverview,
     retrieveRecentAssets,
+    setSecretKey,
 };

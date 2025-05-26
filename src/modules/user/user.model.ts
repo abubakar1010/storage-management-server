@@ -49,14 +49,6 @@ const UserSchema = new Schema<IUser>(
             type: StorageSchema,
             default: {},
         },
-        folders: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Folder",
-                default: null,
-            },
-        ],
-
         favorite: [
             {
                 type: Schema.Types.ObjectId,

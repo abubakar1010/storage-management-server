@@ -2,7 +2,11 @@ import { Router } from "express";
 import { UserControllers } from "./user.controller";
 import auth from "../../middleware/auth";
 import requestValidator from "../../middleware/request-validator";
-import { changePasswordValidationSchema, changeUsernameValidationSchema } from "./user.validation";
+import {
+    changePasswordValidationSchema,
+    changeUsernameValidationSchema,
+    setSecretKeyValidationSchema,
+} from "./user.validation";
 
 const router = Router();
 
@@ -26,19 +30,19 @@ router.post(
 
 // retrieve storage overview route
 
-router.get(
-    "/storage-overview",
-    auth,
-    UserControllers.storageOverview,
-);
+router.get("/storage-overview", auth, UserControllers.storageOverview);
 
 // retrieve recent assets route
 
-router.get(
-    "/recent-assets",
-    auth,
-    UserControllers.retrieveRecentAssets,
-);
+router.get("/recent-assets", auth, UserControllers.retrieveRecentAssets);
 
+// set secret key route
+
+router.post(
+    "/set-secret-key",
+    auth,
+    requestValidator(setSecretKeyValidationSchema),
+    UserControllers.setSecretKey,
+);
 
 export const UserRoutes = router;
