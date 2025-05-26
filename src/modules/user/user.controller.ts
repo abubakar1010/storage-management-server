@@ -108,10 +108,30 @@ const setSecretKey = asyncHandler(async (req, res) => {
     );
 });
 
+const addAssetToPrivate = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { assetId, secretKey } = req.body;
+
+    const result = await userService.addAssetToPrivate(_id, assetId, secretKey);
+
+    if (!result) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to add asset to private");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Asset added to private successfully",
+            data: result,
+        }),
+    );
+});
+
 export const UserControllers = {
     changePassword,
     changeUsername,
     storageOverview,
     retrieveRecentAssets,
     setSecretKey,
+    addAssetToPrivate
 };

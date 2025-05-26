@@ -156,10 +156,56 @@ const setSecretKey = async (userId: string, secretKey: string): Promise<IGeneric
     };
 };
 
+const addAssetToPrivate = async (
+    userId: string,
+    assetId: string,
+    secretKey: string,
+): Promise<IAssetResponse> => {
+    // check if user exist
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    const isValidSecretKey = await bcrypt.compare(secretKey, user.secretKey);
+
+    if (!isValidSecretKey) {
+        throw new ApiError(httpStatus.FORBIDDEN, "Invalid secret key");
+    }
+
+    // check if asset exist
+    const asset = await Asset.findById(assetId);
+
+    if (!asset) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown asset");
+    }
+
+    // check asset already exists in user's private assets
+
+    if (user.private.some((favId) => favId.toString() === assetId)) {
+        throw new ApiError(httpStatus.CONFLICT, "Asset is already in your private assets");
+    }
+
+    // Add asset to user's private assets
+    await User.updateOne({ _id: userId }, { $addToSet: { private: assetId } });
+
+    return {
+        assetId: asset._id,
+        title: asset.title,
+        category: asset.category,
+        url: asset.url,
+        size: formatBytes(asset.size),
+        createdAt: asset.createdAt,
+    };
+};
+
 export const userService = {
     changePassword,
     changeUsername,
     storageOverview,
     retrieveRecentAssets,
     setSecretKey,
+    addAssetToPrivate,
 };

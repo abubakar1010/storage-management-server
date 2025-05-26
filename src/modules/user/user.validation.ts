@@ -35,3 +35,15 @@ export const setSecretKeyValidationSchema = z.object({
         .min(6, "Secret key must be at least 6 characters long")
         .max(64, "Secret key must not exceed 64 characters"),
 });
+
+export const addToPrivateValidationSchema = z.object({
+    secretKey: z
+        .string()
+        .trim()
+        .min(6, "Secret key must be at least 6 characters long")
+        .max(64, "Secret key must not exceed 64 characters"),
+    assetId: z
+        .string()
+        .nonempty("Asset ID is required")
+        .regex(/^[a-f\d]{24}$/i, "Invalid Asset ID format"),
+});

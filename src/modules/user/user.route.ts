@@ -3,6 +3,7 @@ import { UserControllers } from "./user.controller";
 import auth from "../../middleware/auth";
 import requestValidator from "../../middleware/request-validator";
 import {
+    addToPrivateValidationSchema,
     changePasswordValidationSchema,
     changeUsernameValidationSchema,
     setSecretKeyValidationSchema,
@@ -43,6 +44,15 @@ router.post(
     auth,
     requestValidator(setSecretKeyValidationSchema),
     UserControllers.setSecretKey,
+);
+
+// add asset to private
+
+router.post(
+    "/add-to-private",
+    auth,
+    requestValidator(addToPrivateValidationSchema),
+    UserControllers.addAssetToPrivate,
 );
 
 export const UserRoutes = router;
