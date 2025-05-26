@@ -5,6 +5,7 @@ import { IAsset, IAssetResponse, IGenericResponse, IUploadAsset } from "./assets
 import { uploadAssets } from "../../utils/UploadAssets";
 import { Asset } from "./assets.model";
 import { formatBytes, sanitizeFileName } from "./assets.utils";
+import { Folder } from "../folder/folder.model";
 
 const insertAsset = async (uploadData: IUploadAsset): Promise<IAssetResponse> => {
     const { userId, fileName, filePath, category } = uploadData;
@@ -70,50 +71,61 @@ const insertAsset = async (uploadData: IUploadAsset): Promise<IAssetResponse> =>
 const deleteAsset = async (userId: string, assetId: string): Promise<IGenericResponse> => {
     // check if user exist
     const user = await User.findById(userId);
+    if (!user) throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
 
-    if (!user) {
-        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
-    }
-
-    // check if asset exist
     const asset = await Asset.findById(assetId);
+    if (!asset) throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown asset");
 
-    if (!asset) {
-        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown asset");
-    }
-    // check if asset belongs to user
     if (asset.userId.toString() !== userId) {
         throw new ApiError(httpStatus.FORBIDDEN, "You do not have permission to delete this asset");
     }
 
-    // implement transaction to delete asset and update user storage
-
     const session = await User.startSession();
-    session.startTransaction();
+
     try {
-        // Delete the asset
-        await Asset.deleteOne({ _id: assetId });
+        await session.withTransaction(async () => {
 
-        // Update user's storage
-        user.storage.usagesStorage -= asset.size;
-        user.storage.availableStorage += asset.size;
+            // Delete asset inside transaction
+            await Asset.deleteOne({ _id: assetId }, { session });
 
-        await user.save({ session });
+            // Update user storage safely
+            user.storage.usagesStorage = Math.max(0, user.storage.usagesStorage - asset.size);
+            user.storage.availableStorage = Math.max(0, user.storage.availableStorage + asset.size);
 
-        // Commit the transaction
-        await session.commitTransaction();
-    } catch (error) {
-        // Rollback the transaction in case of error
-        await session.abortTransaction();
-        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to delete asset");
-    } finally {
+            await user.save({ session });
+
+            // Remove asset from favorite and private arrays in all users
+            await User.updateMany(
+                { favorite: assetId },
+                { $pull: { favorite: assetId } },
+                { session },
+            );
+            await User.updateMany(
+                { private: assetId },
+                { $pull: { private: assetId } },
+                { session },
+            );
+
+            // Remove asset from all folders
+            await Folder.updateMany(
+                { assets: assetId },
+                { $pull: { assets: assetId } },
+                { session },
+            );
+        });
+
         session.endSession();
-    }
 
-    return {
-        message: "Asset deleted successfully",
-        success: true,
-    };
+        return {
+            message: "Asset deleted successfully",
+            success: true,
+        };
+    } catch (error) {
+        await session.abortTransaction();
+        session.endSession();
+
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to delete asset");
+    }
 };
 
 const addToFavorite = async (userId: string, assetId: string): Promise<IAssetResponse> => {
