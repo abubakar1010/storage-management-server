@@ -46,7 +46,26 @@ const previewFolder = asyncHandler(async (req, res) => {
     );
 });
 
+const retrieveAllRootFolders = asyncHandler(async (req, res) => {
+    const { _id: userId } = req.user;
+
+    const result = await folderService.retrieveAllRootFolders(userId);
+
+    if (!result) {
+        throw new ApiError(httpStatus.NOT_FOUND, "No root folders found");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Folders retrieved successfully",
+            data: result,
+        }),
+    );
+});
+
 export const FolderControllers = {
     createFolder,
     previewFolder,
+    retrieveAllRootFolders,
 };

@@ -4,6 +4,8 @@ import httpStatus from "http-status";
 import { Folder } from "./folder.model";
 import { ICreateFolderResponse } from "./folder.interface";
 import { Types } from "mongoose";
+import { formatBytes } from "../assets/assets.utils";
+import { create } from "domain";
 
 const createFolder = async (
     userId: string,
@@ -39,6 +41,7 @@ const createFolder = async (
     return {
         folderId: folder._id,
         name: folder.name,
+        size: formatBytes(folder.size),
     };
 };
 
@@ -66,18 +69,53 @@ const previewFolder = async (userId: string, folderId: string) => {
 
     // get child folders
 
-    const childFolders = await Folder.find({ parentId: folderId });
+    const childFolders = await Folder.find({ parentId: folderId }).select(
+        "_id size name parentId createdAt",
+    );
 
     return {
         folderId: folder._id,
         name: folder.name,
         parentId: folder.parentId,
+        size: folder.size,
         assets: folder.assets,
         childFolders,
     };
 };
 
+const retrieveAllRootFolders = async (
+    userId: string,
+): Promise<
+    {
+        folderId: Types.ObjectId;
+        name: string;
+        size: string;
+        createdAt: Date | undefined;
+    }[]
+> => {
+    const user = await User.findById(userId);
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    const rootFolders = await Folder.find({ userId: user._id, parentId: null });
+
+    if (!rootFolders || rootFolders.length === 0) {
+        throw new ApiError(httpStatus.NOT_FOUND, "No root folders found");
+    }
+
+    const returnData = rootFolders.map((folder) => ({
+        folderId: folder._id,
+        name: folder.name,
+        size: formatBytes(folder.size),
+        createdAt: folder.createdAt,
+    }));
+
+    return returnData;
+};
+
 export const folderService = {
     createFolder,
     previewFolder,
+    retrieveAllRootFolders,
 };

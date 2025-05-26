@@ -23,4 +23,12 @@ router.get(
     FolderControllers.previewFolder,
 );
 
+// retrieve all root folders route
+
+router.get(
+    "/retrieve-all-root-folders",
+    auth,
+    FolderControllers.retrieveAllRootFolders,
+);
+
 export const FolderRoutes = router;
