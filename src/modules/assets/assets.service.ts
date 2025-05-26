@@ -1,7 +1,7 @@
 import ApiError from "../../utils/ApiError";
 import { User } from "../user/user.model";
 import httpStatus from "http-status";
-import { IAssetResponse, IGenericResponse, IUploadAsset } from "./assets.interface";
+import { IAsset, IAssetResponse, IGenericResponse, IUploadAsset } from "./assets.interface";
 import { uploadAssets } from "../../utils/UploadAssets";
 import { Asset } from "./assets.model";
 import { formatBytes, sanitizeFileName } from "./assets.utils";
@@ -215,10 +215,34 @@ const previewAllAssetByCategory = async (
     }));
 };
 
+const previewFavoriteAssets = async (userId: string): Promise<IAssetResponse[]> => {
+    const user = await User.findById(userId).populate("favorite");
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    if (user.favorite.length <= 0) {
+        throw new ApiError(httpStatus.NOT_FOUND, "You haven't any asset as favorite");
+    }
+
+    const assets = user.favorite as unknown as IAsset[];
+
+    return assets.map((asset) => ({
+        assetId: asset._id,
+        title: asset.title,
+        category: asset.category,
+        url: asset.url,
+        size: formatBytes(asset.size),
+        createdAt: asset.createdAt,
+    }));
+};
+
 export const assetService = {
     insertAsset,
     addToFavorite,
     deleteAsset,
     renameAsset,
     previewAllAssetByCategory,
+    previewFavoriteAssets,
 };

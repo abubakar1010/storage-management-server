@@ -42,4 +42,8 @@ router.patch(
 
 router.get("/preview-assets/:category", auth, AssetControllers.previewAllAssetByCategory);
 
+// preview favorite assets
+
+router.get("/preview-favorite-assets", auth, AssetControllers.previewFavoriteAssets);
+
 export const AssetRoute = router;

@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 
 export interface IAsset {
+    _id: Types.ObjectId;
     userId: Types.ObjectId;
     title: string;
     category: "notes" | "images" | "pdfs";

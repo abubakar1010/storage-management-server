@@ -128,10 +128,25 @@ const previewAllAssetByCategory = asyncHandler(async (req, res) => {
     );
 });
 
+const previewFavoriteAssets = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+
+    const assets = await assetService.previewFavoriteAssets(_id);
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Favorite Assets retrieved successfully",
+            data: assets,
+        }),
+    );
+});
+
 export const AssetControllers = {
     insertAsset,
     addToFavorite,
     deleteAsset,
     renameAsset,
     previewAllAssetByCategory,
+    previewFavoriteAssets,
 };
