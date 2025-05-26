@@ -287,6 +287,41 @@ const removeAssetFromFavorite = async (
     };
 };
 
+const findAssetByDate = async (userId: string, targetDate: Date): Promise<IAssetResponse[]> => {
+    const user = await User.findById(userId);
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    // Clone the date to avoid mutation issues
+    const startOfDay = new Date(targetDate);
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date(targetDate);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const assets = await Asset.find({
+        userId: user._id,
+        createdAt: {
+            $gte: startOfDay,
+            $lt: endOfDay,
+        },
+    });
+
+    if (assets.length === 0) {
+        throw new ApiError(httpStatus.NOT_FOUND, "No assets found for the specified date");
+    }
+
+    return assets.map((asset) => ({
+        assetId: asset._id,
+        title: asset.title,
+        category: asset.category,
+        url: asset.url,
+        size: formatBytes(asset.size),
+        createdAt: asset.createdAt,
+    }));
+};
+
 export const assetService = {
     insertAsset,
     addToFavorite,
@@ -295,4 +330,5 @@ export const assetService = {
     previewAllAssetByCategory,
     previewFavoriteAssets,
     removeAssetFromFavorite,
+    findAssetByDate,
 };

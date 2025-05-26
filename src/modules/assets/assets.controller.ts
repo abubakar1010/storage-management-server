@@ -168,6 +168,34 @@ const removeAssetFromFavorite = asyncHandler(async (req, res) => {
     );
 });
 
+const findAssetByDate = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { date } = req.params;
+
+    if (!date || !date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid date format. Use YYYY-MM-DD.");
+    }
+
+    const parsedDate = new Date(date);
+    if (isNaN(parsedDate.getTime())) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid date provided.");
+    }
+
+    const assets = await assetService.findAssetByDate(_id, parsedDate);
+
+    if (!assets || assets.length === 0) {
+        throw new ApiError(httpStatus.NOT_FOUND, "No assets found for the specified date");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Assets retrieved successfully",
+            data: assets,
+        }),
+    );
+});
+
 export const AssetControllers = {
     insertAsset,
     addToFavorite,
@@ -176,4 +204,5 @@ export const AssetControllers = {
     previewAllAssetByCategory,
     previewFavoriteAssets,
     removeAssetFromFavorite,
+    findAssetByDate,
 };

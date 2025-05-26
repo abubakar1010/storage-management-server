@@ -50,4 +50,8 @@ router.get("/preview-favorite-assets", auth, AssetControllers.previewFavoriteAss
 
 router.delete("/remove-favorite-asset/:assetId", auth, AssetControllers.removeAssetFromFavorite);
 
+// find asset by date
+
+router.get("/find-asset-by-date/:date", auth, AssetControllers.findAssetByDate);
+
 export const AssetRoute = router;
