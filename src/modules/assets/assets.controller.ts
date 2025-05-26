@@ -50,6 +50,25 @@ const insertAsset = asyncHandler(async (req, res) => {
     );
 });
 
+const deleteAsset = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { assetId } = req.body;
+
+    const result = await assetService.deleteAsset(_id, assetId);
+
+    if (!result) {
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to delete asset");
+    }
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Asset deleted successfully",
+            data: result,
+        }),
+    );
+});
+
 const addToFavorite = asyncHandler(async (req, res) => {
     const { _id } = req.user;
     const { assetId } = req.body;
@@ -72,4 +91,5 @@ const addToFavorite = asyncHandler(async (req, res) => {
 export const AssetControllers = {
     insertAsset,
     addToFavorite,
+    deleteAsset,
 };

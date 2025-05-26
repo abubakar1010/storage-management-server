@@ -27,3 +27,8 @@ export interface IUploadedAssetResponse {
     size: string;
     createdAt: Date;
 }
+
+export interface IGenericResponse {
+    message: string;
+    success: boolean;
+}

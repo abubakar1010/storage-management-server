@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const addToFavoriteValidationSchema = z.object({
+export const assetActionSchema = z.object({
     assetId: z
         .string()
         .nonempty("Asset ID is required")

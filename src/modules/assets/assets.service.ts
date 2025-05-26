@@ -1,7 +1,7 @@
 import ApiError from "../../utils/ApiError";
 import { User } from "../user/user.model";
 import httpStatus from "http-status";
-import { IUploadAsset, IUploadedAssetResponse } from "./assets.interface";
+import { IGenericResponse, IUploadAsset, IUploadedAssetResponse } from "./assets.interface";
 import { uploadAssets } from "../../utils/UploadAssets";
 import { Asset } from "./assets.model";
 import { formatBytes } from "./assets.utils";
@@ -67,6 +67,55 @@ const insertAsset = async (uploadData: IUploadAsset): Promise<IUploadedAssetResp
     };
 };
 
+const deleteAsset = async (userId: string, assetId: string): Promise<IGenericResponse> => {
+    // check if user exist
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    // check if asset exist
+    const asset = await Asset.findById(assetId);
+
+    if (!asset) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown asset");
+    }
+    // check if asset belongs to user
+    if (asset.userId.toString() !== userId) {
+        throw new ApiError(httpStatus.FORBIDDEN, "You do not have permission to delete this asset");
+    }
+
+    // implement transaction to delete asset and update user storage
+
+    const session = await User.startSession();
+    session.startTransaction();
+    try {
+        // Delete the asset
+        await Asset.deleteOne({ _id: assetId });
+
+        // Update user's storage
+        user.storage.usagesStorage -= asset.size;
+        user.storage.availableStorage += asset.size;
+
+        await user.save({ session });
+
+        // Commit the transaction
+        await session.commitTransaction();
+    } catch (error) {
+        // Rollback the transaction in case of error
+        await session.abortTransaction();
+        throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Failed to delete asset");
+    } finally {
+        session.endSession();
+    }
+
+    return {
+        message: "Asset deleted successfully",
+        success: true,
+    };
+};
+
 const addToFavorite = async (userId: string, assetId: string): Promise<IUploadedAssetResponse> => {
     // check if user exist
 
@@ -99,4 +148,5 @@ const addToFavorite = async (userId: string, assetId: string): Promise<IUploaded
 export const assetService = {
     insertAsset,
     addToFavorite,
+    deleteAsset,
 };
