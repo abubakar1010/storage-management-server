@@ -38,4 +38,8 @@ router.patch(
     AssetControllers.renameAsset,
 );
 
+// preview all assets by category
+
+router.get("/preview-assets/:category", auth, AssetControllers.previewAllAssetByCategory);
+
 export const AssetRoute = router;

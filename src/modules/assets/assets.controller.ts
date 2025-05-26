@@ -107,9 +107,31 @@ const renameAsset = asyncHandler(async (req, res) => {
     );
 });
 
+const previewAllAssetByCategory = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { category } = req.params;
+
+    const allowedCategories = ["notes", "images", "pdfs"];
+
+    if (!category || !allowedCategories.includes(category)) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid category");
+    }
+
+    const assets = await assetService.previewAllAssetByCategory(_id, category);
+
+    res.status(httpStatus.OK).json(
+        new ApiResponse({
+            statusCode: httpStatus.OK,
+            message: "Assets retrieved successfully",
+            data: assets,
+        }),
+    );
+});
+
 export const AssetControllers = {
     insertAsset,
     addToFavorite,
     deleteAsset,
     renameAsset,
+    previewAllAssetByCategory,
 };

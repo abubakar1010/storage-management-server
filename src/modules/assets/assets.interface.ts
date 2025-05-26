@@ -19,7 +19,7 @@ export interface IUploadAsset {
     category: "notes" | "images" | "pdfs";
 }
 
-export interface IUploadedAssetResponse {
+export interface IAssetResponse {
     assetId: Types.ObjectId;
     title: string;
     category: string;

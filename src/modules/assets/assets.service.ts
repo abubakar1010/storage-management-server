@@ -1,12 +1,12 @@
 import ApiError from "../../utils/ApiError";
 import { User } from "../user/user.model";
 import httpStatus from "http-status";
-import { IGenericResponse, IUploadAsset, IUploadedAssetResponse } from "./assets.interface";
+import { IAssetResponse, IGenericResponse, IUploadAsset } from "./assets.interface";
 import { uploadAssets } from "../../utils/UploadAssets";
 import { Asset } from "./assets.model";
 import { formatBytes, sanitizeFileName } from "./assets.utils";
 
-const insertAsset = async (uploadData: IUploadAsset): Promise<IUploadedAssetResponse> => {
+const insertAsset = async (uploadData: IUploadAsset): Promise<IAssetResponse> => {
     const { userId, fileName, filePath, category } = uploadData;
     // Find the user by ID
     const user = await User.findById(userId);
@@ -116,7 +116,7 @@ const deleteAsset = async (userId: string, assetId: string): Promise<IGenericRes
     };
 };
 
-const addToFavorite = async (userId: string, assetId: string): Promise<IUploadedAssetResponse> => {
+const addToFavorite = async (userId: string, assetId: string): Promise<IAssetResponse> => {
     // check if user exist
 
     const user = await User.findById(userId);
@@ -149,7 +149,7 @@ const renameAsset = async (
     userId: string,
     assetId: string,
     newTitle: string,
-): Promise<IUploadedAssetResponse> => {
+): Promise<IAssetResponse> => {
     // check if user exist
     const user = await User.findById(userId);
 
@@ -189,9 +189,36 @@ const renameAsset = async (
     };
 };
 
+const previewAllAssetByCategory = async (
+    userId: string,
+    category: string,
+): Promise<IAssetResponse[]> => {
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(httpStatus.BAD_REQUEST, "Invalid or unknown user");
+    }
+
+    const assets = await Asset.find({ userId: user._id, category });
+
+    if (assets.length === 0) {
+        throw new ApiError(httpStatus.NOT_FOUND, `No ${category} assets found`);
+    }
+
+    return assets.map((asset) => ({
+        assetId: asset._id,
+        title: asset.title,
+        category: asset.category,
+        url: asset.url,
+        size: formatBytes(asset.size),
+        createdAt: asset.createdAt,
+    }));
+};
+
 export const assetService = {
     insertAsset,
     addToFavorite,
     deleteAsset,
     renameAsset,
+    previewAllAssetByCategory,
 };
