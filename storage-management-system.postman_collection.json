@@ -1,0 +1,5763 @@
+{
+	"info": {
+		"_postman_id": "1a09108f-de73-448e-9061-a679eea9681a",
+		"name": "storage-management-system",
+		"description": "This is a **storage manage** system server for efeciently mange you storage.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38201033",
+		"_collection_link": "https://zerith-io.postman.co/workspace/6b91a604-b06f-4ac0-88de-da4a1316026b/collection/38201033-1a09108f-de73-448e-9061-a679eea9681a?action=share&source=collection_link&creator=38201033"
+	},
+	"item": [
+		{
+			"name": "authenticaton",
+			"item": [
+				{
+					"name": "register-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"muhammad1010\",\r\n    \"email\": \"muhammad850772@gmail.com\",\r\n    \"password\": \"Muhammad-io@123\",\r\n    \"confirmPassword\": \"Muhammad-io@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth/register-user",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth",
+								"register-user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"muhammad1010\",\r\n    \"email\": \"muhammad850772@gmail.com\",\r\n    \"password\": \"muhammad-io@123\",\r\n    \"confirmPassword\": \"muhammad-io@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/auth/register-user",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register-user"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "175"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 15:56:08 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"af-aMd91FbJ1NHoZTdKyh1Vcpxj2wQ\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::q5qd8-1748274967256-fa5481c5dae4"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Zod validation Error\",\n    \"errorSources\": [\n        {\n            \"path\": \"password\",\n            \"message\": \"Password must contain uppercase, lowercase, number, and symbol\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"muhammad1010\",\r\n    \"email\": \"muhammad850772@gmail.com\",\r\n    \"password\": \"Muhammad-io@123\",\r\n    \"confirmPassword\": \"Muhammad-io@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/auth/register-user",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"auth",
+										"register-user"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "162"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:24:08 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"a2-IptXZqf21Io76WPLpUvECpQxN4w\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::t5mdg-1748276647160-8a6dade2f821"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 201,\n    \"message\": \"User is created successfully\",\n    \"data\": {\n        \"_id\": \"683495a83ca8906ea1523c6f\",\n        \"username\": \"muhammad1010\",\n        \"email\": \"muhammad850772@gmail.com\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "login-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"muhammad850772@gmail.com\",\r\n    \"password\": \"Muhammad-io@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth/login-user",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth",
+								"login-user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"muhammad850772@gmail.com\",\r\n    \"password\": \"Speak-io@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/auth/login-user",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login-user"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "123"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:27:41 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"7b-dZMzbBSxXqIb0qEnr6uFqnQvQpI\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::q5dqn-1748276860446-9bca9598b36c"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Invalid Credentials\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Invalid Credentials\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"muhammad850772@gmail.com\",\r\n    \"password\": \"Muhammad-io@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/auth/login-user",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"auth",
+										"login-user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "348"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:29:49 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"15c-k/9mpt2NQyLCIAdCo8QWBmbd5NY\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::nhzqb-1748276989434-801e39010039"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"User is logged in successfully!\",\n    \"data\": {\n        \"_id\": \"683496d94a097c0d2c60fabf\",\n        \"username\": \"muhammad1010\",\n        \"email\": \"muhammad850772@gmail.com\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODM0OTZkOTRhMDk3YzBkMmM2MGZhYmYiLCJpYXQiOjE3NDgyNzY5ODksImV4cCI6MTc0ODQ0OTc4OX0.yz5IaxKR6bY99wHI-8fWLSLdW3g-xuV54E8d3pF-y7M\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "forgot-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"muhammad850772@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth/forgot-password",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"muhammad50772@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/auth/forgot-password",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"auth",
+										"forgot-password"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "147"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:30:33 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"93-9j78eeToXVhSpLZCH5Q3aJ/8CA8\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::z897q-1748277033447-a0ed69c036f8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"User not found with this email!\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"User not found with this email!\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"muhammad850772@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/auth/forgot-password",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"auth",
+										"forgot-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "78"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:30:55 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"4e-v4+6ukd8/hjfzLroqgWDemhPu1g\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::szc6x-1748277053508-cf293a66a2b9"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"OTP sent successfully to your email\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "verify-otp",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otp\": \"714317\",\r\n    \"email\": \"muhammad850772@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth/verify-otp",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth",
+								"verify-otp"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"otp\": \"434170\",\r\n    \"email\": \"muhammad850772@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/auth/verify-otp",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"auth",
+										"verify-otp"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "107"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:32:41 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"6b-g+LCcvc1IGX8yqSpbSxFT9jd74k\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::qjvpr-1748277160436-70462bc05b84"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Invalid OTP\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Invalid OTP\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"otp\": \"714317\",\r\n    \"email\": \"muhammad850772@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/auth/verify-otp",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"auth",
+										"verify-otp"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:33:09 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"44-qJfW1HPyL8Fvq/Ok+EFaI0Aha5w\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::hxg9n-1748277188364-724e6a33931b"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"OTP verified successfully\",\n    \"data\": null\n}"
+						},
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"otp\": \"714317\",\r\n    \"email\": \"muhammad850772@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/auth/verify-otp",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"auth",
+										"verify-otp"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "135"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:33:42 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"87-GxltWyH3wovGy6pqdQPFHwgEvt4\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::f6z8g-1748277222302-aaeb109f4c9e"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"OTP has already been used\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"OTP has already been used\"\n        }\n    ],\n    \"stack\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"muhammad850772@gmail.com\",\r\n    \"newPassword\": \"newSpeak-io@123\",\r\n    \"confirmNewPassword\": \"newSpeak-io@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/auth/reset-password",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"muhammad850772@gmail.com\",\r\n    \"newPassword\": \"newSpeak-io@123\",\r\n    \"confirmNewPassword\": \"ewSpeak-io@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/auth/reset-password",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"auth",
+										"reset-password"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "171"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:34:48 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"ab-5xWe2Mnmay+u8NXumLtHyMNRioo\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::lggv8-1748277288213-501bd0cd87f7"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Zod validation Error\",\n    \"errorSources\": [\n        {\n            \"path\": \"confirmNewPassword\",\n            \"message\": \"new password and confirm new password must match\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"muhammad850772@gmail.com\",\r\n    \"newPassword\": \"newSpeak-io@123\",\r\n    \"confirmNewPassword\": \"newSpeak-io@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/auth/reset-password",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"auth",
+										"reset-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "70"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:35:08 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"46-HX/HCWJROnWmqoN/cyzSEROUtkQ\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::wtc4m-1748277306928-41e677d49e74"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Password reset successfully\",\n    \"data\": null\n}"
+						},
+						{
+							"name": "duplicate-request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"muhammad850772@gmail.com\",\r\n    \"newPassword\": \"newSpeak-io@123\",\r\n    \"confirmNewPassword\": \"newSpeak-io@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/auth/reset-password",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"auth",
+										"reset-password"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "151"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:35:32 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"97-/yDodHP7oTqRSnGfNL+22VJsSqE\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::nx948-1748277332177-88fed6101d16"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"You need to verify your OTP first\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"You need to verify your OTP first\"\n        }\n    ],\n    \"stack\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "change-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\": \"newSpeak-io@123\",\r\n    \"newPassword\": \"Speak-io@123\",\r\n    \"confirmNewPassword\": \"Speak-io@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/change-password",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"change-password"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "unauthorized-request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currentPassword\": \"2newSpeak-io@123\",\r\n    \"newPassword\": \"newSpeak-io@123\",\r\n    \"confirmNewPassword\": \"newSpeak-io@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/users/change-password",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"change-password"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:38:04 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"c5-3hsuvj+a6R1V0H86vH7+gNmVULw\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::qjvpr-1748277484720-4b72dab5750f"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Unauthorized access! Please make sure you are logged in.\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Unauthorized access! Please make sure you are logged in.\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currentPassword\": \"Muhammad-io@123\",\r\n    \"newPassword\": \"newSpeak-io@123\",\r\n    \"confirmNewPassword\": \"nwSpeak-io@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/change-password",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"change-password"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "171"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:40:25 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"ab-5xWe2Mnmay+u8NXumLtHyMNRioo\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::qncjl-1748277625332-07538aad1248"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Zod validation Error\",\n    \"errorSources\": [\n        {\n            \"path\": \"confirmNewPassword\",\n            \"message\": \"new password and confirm new password must match\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currentPassword\": \"newSpeak-io@123\",\r\n    \"newPassword\": \"Speak-io@123\",\r\n    \"confirmNewPassword\": \"Speak-io@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/change-password",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"change-password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "72"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:42:44 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"48-wO9puuf7C5lEQ2xBfZLWxXQ9Iuo\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::9blb4-1748277762969-a5aa3d950480"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Password changed successfully\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "storage-overview",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/storage-overview",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"storage-overview"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/users/storage-overview",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"storage-overview"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Age",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:43:22 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"c5-3hsuvj+a6R1V0H86vH7+gNmVULw\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::9kfq2-1748277802803-df1dbb8d756b"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Unauthorized access! Please make sure you are logged in.\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Unauthorized access! Please make sure you are logged in.\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/storage-overview",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"storage-overview"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "354"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:43:57 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"162-TF92Hk2VweL+sVdpdb1mEuSKciE\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::nst4f-1748277836486-77753d74b2b2"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"storage overviews retrieved successfully\",\n    \"data\": {\n        \"storage\": {\n            \"totalStorage\": \"15.00 GB\",\n            \"usagesStorage\": \"0 Byte\",\n            \"availableStorage\": \"15.00 GB\"\n        },\n        \"folder\": {\n            \"totalItem\": 0,\n            \"totalSize\": \"0 Byte\"\n        },\n        \"notes\": {\n            \"totalItem\": 0,\n            \"totalSize\": \"0 Byte\"\n        },\n        \"images\": {\n            \"totalItem\": 0,\n            \"totalSize\": \"0 Byte\"\n        },\n        \"pdfs\": {\n            \"totalItem\": 0,\n            \"totalSize\": \"0 Byte\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "recent-assets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/recent-assets",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"recent-assets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/users/recent-assets",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"recent-assets"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "129"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:49:20 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"81-WTKhY+MUtnBK3FX8DXg+H1Q7NrE\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::7mjml-1748278160022-7ec98cb71af7"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"No recent assets found\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"No recent assets found\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/recent-assets",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"recent-assets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:05:20 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"514-XxNMUZ0J3wMHtSP3Pkndfif6ln0\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::qq8mn-1748279115455-6c21e7bf9985"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Recent assets retrieved successfully\",\n    \"data\": [\n        {\n            \"assetId\": \"68349f3d870fd12cc0b770b4\",\n            \"title\": \"cs.102eeb95.pdf\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748279100/cs.102eeb95.pdf.pdf\",\n            \"size\": \"366.42 KB\",\n            \"category\": \"pdfs\",\n            \"createdAt\": \"2025-05-26T17:05:01.055Z\"\n        },\n        {\n            \"assetId\": \"68349ca3d424b38898ace65f\",\n            \"title\": \"One_Liner_Quotes.jpg\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748245092/One_Liner_Quotes.jpg.jpg\",\n            \"size\": \"40.48 KB\",\n            \"category\": \"images\",\n            \"createdAt\": \"2025-05-26T16:53:55.783Z\"\n        },\n        {\n            \"assetId\": \"68349c227ef121716925714b\",\n            \"title\": \"iterative_developing_prompt.jpg\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748278306/iterative_developing_prompt.jpg.jpg\",\n            \"size\": \"27.13 KB\",\n            \"category\": \"images\",\n            \"createdAt\": \"2025-05-26T16:51:46.597Z\"\n        },\n        {\n            \"assetId\": \"68349bf57ef1217169257145\",\n            \"title\": \"git-cheat-sheet-education.pdf\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748260573/git-cheat-sheet-education.pdf.pdf\",\n            \"size\": \"97.85 KB\",\n            \"category\": \"pdfs\",\n            \"createdAt\": \"2025-05-26T16:51:01.332Z\"\n        },\n        {\n            \"assetId\": \"68349be47ef121716925713f\",\n            \"title\": \"ER_Diagram.pdf\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748260619/ER_Diagram.pdf.pdf\",\n            \"size\": \"354.38 KB\",\n            \"category\": \"pdfs\",\n            \"createdAt\": \"2025-05-26T16:50:44.750Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "set-secret-key",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"secretKey\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/set-secret-key",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"set-secret-key"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"secretKey\": \"12346\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/users/set-secret-key",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"set-secret-key"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "159"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:48:25 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"9f-22oY6gUpZNymzqTeoBR9532bwDU\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::c8n95-1748278104708-9c7535ff520f"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Zod validation Error\",\n    \"errorSources\": [\n        {\n            \"path\": \"secretKey\",\n            \"message\": \"Secret key must be at least 6 characters long\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"secretKey\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/set-secret-key",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"set-secret-key"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "70"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:48:52 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"46-xtyslSab1gaHu9IBTlc3863sB+g\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::f6z8g-1748278129487-16b20e8539de"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Secret key set successfully\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "add-to-add-to-private",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assetId\": \"68349ca3d424b38898ace65f\",\r\n    \"secretKey\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/add-to-private",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"add-to-private"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assetId\": \"68349f3d870fd12cc0b770b4\",\r\n    \"secretKey\": \"12346\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/users/add-to-private",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"add-to-private"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "159"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:06:01 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"9f-22oY6gUpZNymzqTeoBR9532bwDU\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::f2fjg-1748279160543-863267a8f69d"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Zod validation Error\",\n    \"errorSources\": [\n        {\n            \"path\": \"secretKey\",\n            \"message\": \"Secret key must be at least 6 characters long\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assetId\": \"68349f3d870fd12cc0b770b4\",\r\n    \"secretKey\": \"123546\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/add-to-private",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"add-to-private"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "121"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:06:25 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"79-8hzEQp61PeIKSnAGXk1wS2XQ72M\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::kzmc8-1748279184975-43ea05d20cdd"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Invalid secret key\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Invalid secret key\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assetId\": \"68349f3d870fd12cc0b770b4\",\r\n    \"secretKey\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/add-to-private",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"add-to-private"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "304"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:06:51 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"130-g8O6gDltRh8q1vulcmQbkQMeSBU\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::gccm5-1748279210629-5fe56d8ee9d5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Asset added to private successfully\",\n    \"data\": {\n        \"assetId\": \"68349f3d870fd12cc0b770b4\",\n        \"title\": \"cs.102eeb95.pdf\",\n        \"category\": \"pdfs\",\n        \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748279100/cs.102eeb95.pdf.pdf\",\n        \"size\": \"366.42 KB\",\n        \"createdAt\": \"2025-05-26T17:05:01.055Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "preview-private-assets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"secretKey\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/preview-private-assets",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"preview-private-assets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"secretKey\": \"123459\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/users/preview-private-assets",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"preview-private-assets"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "121"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:07:19 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"79-8hzEQp61PeIKSnAGXk1wS2XQ72M\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::dvrmt-1748279238550-55c7cce4d075"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Invalid secret key\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Invalid secret key\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"secretKey\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/preview-private-assets",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"preview-private-assets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "308"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:07:38 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"134-vSxPrF10M9cdr89QYMapmy11Ty4\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::nst4f-1748279257903-bb5f559c98d7"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Private Assets retrieved successfully\",\n    \"data\": [\n        {\n            \"assetId\": \"68349f3d870fd12cc0b770b4\",\n            \"title\": \"cs.102eeb95.pdf\",\n            \"category\": \"pdfs\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748279100/cs.102eeb95.pdf.pdf\",\n            \"size\": \"366.42 KB\",\n            \"createdAt\": \"2025-05-26T17:05:01.055Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "remove-from-private",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"secretKey\": \"123456\",\r\n    \"assetId\": \"68349ca3d424b38898ace65f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/remove-asset-from-private",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"remove-asset-from-private"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"secretKey\": \"123456\",\r\n    \"assetId\": \"68349ca3d424b38898ace65f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/users/remove-asset-from-private",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"users",
+										"remove-asset-from-private"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "143"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:09:32 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"8f-7fR21cwQVelH/BX+owsblBBAGqM\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::s8x8c-1748279371701-0cc23a0a14a9"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Asset is not in your privates\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Asset is not in your privates\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"secretKey\": \"123456\",\r\n    \"assetId\": \"68349ca3d424b38898ace65f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/remove-asset-from-private",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"remove-asset-from-private"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:09:08 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"53-2g3oOGOEGdwo2fSKGaLmkJSm3Sw\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::vrsjw-1748279347787-493a94b1ca6d"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Asset removed from privates successfully\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "delete-user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/users/delete-user",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"delete-user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "assets",
+			"item": [
+				{
+					"name": "upload-assets",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "asset",
+									"type": "file",
+									"src": "/D:/cs.102eeb95.pdf"
+								},
+								{
+									"key": "formData",
+									"value": "{\"category\": \"pdfs\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{dev_url}}/assets/upload-assets",
+							"host": [
+								"{{dev_url}}"
+							],
+							"path": [
+								"assets",
+								"upload-assets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "asset",
+											"type": "file",
+											"src": "/D:/ER Diagram.pdf"
+										},
+										{
+											"key": "formData",
+											"value": "{\"category\": \"pd\"}",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/assets/upload-assets",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"assets",
+										"upload-assets"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "117"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:50:06 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"75-xdvtqQlT1VFKyaYnk+E2fMUZSXg\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::sd69g-1748278204711-6773ef9da056"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Invalid category\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Invalid category\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response(pdfs)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "asset",
+											"type": "file",
+											"src": "/D:/git-cheat-sheet-education.pdf"
+										},
+										{
+											"key": "formData",
+											"value": "{\"category\": \"pdfs\"}",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/assets/upload-assets",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"assets",
+										"upload-assets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "323"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:51:01 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"143-zn8ShqtkvsdiFD7+K6ZQNT5yhnc\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::nx948-1748278259390-636bb9c8d016"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Asset uploaded successfully\",\n    \"data\": {\n        \"assetId\": \"68349bf57ef1217169257145\",\n        \"title\": \"git-cheat-sheet-education.pdf\",\n        \"category\": \"pdfs\",\n        \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748260573/git-cheat-sheet-education.pdf.pdf\",\n        \"size\": \"97.85 KB\",\n        \"createdAt\": \"2025-05-26T16:51:01.332Z\"\n    }\n}"
+						},
+						{
+							"name": "success-response-example(images)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "asset",
+											"type": "file",
+											"src": "/D:/iterative_developing_prompt.jpg"
+										},
+										{
+											"key": "formData",
+											"value": "{\"category\": \"images\"}",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/assets/upload-assets",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"assets",
+										"upload-assets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "329"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 16:51:47 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"149-b4XOxGHuxRyyWVDW9c8deoRbvt4\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::wtc4m-1748278304795-99b48d50e88c"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Asset uploaded successfully\",\n    \"data\": {\n        \"assetId\": \"68349c227ef121716925714b\",\n        \"title\": \"iterative_developing_prompt.jpg\",\n        \"category\": \"images\",\n        \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748278306/iterative_developing_prompt.jpg.jpg\",\n        \"size\": \"27.13 KB\",\n        \"createdAt\": \"2025-05-26T16:51:46.597Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "add-to-favorite",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assetId\": \"68349be47ef121716925713f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/assets/add-to-favorite",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"assets",
+								"add-to-favorite"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assetId\": \"68349be47ef121716925713\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/assets/add-to-favorite",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"assets",
+										"add-to-favorite"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "135"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:10:34 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"87-L2sthEFVW7xWC/oKW9Xl7ZGFt0E\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::dsm9t-1748279433704-29e95c356458"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Zod validation Error\",\n    \"errorSources\": [\n        {\n            \"path\": \"assetId\",\n            \"message\": \"Invalid Asset ID format\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assetId\": \"68349be47ef121716925713f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/assets/add-to-favorite",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"assets",
+										"add-to-favorite"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "304"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:10:51 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"130-MdewNkVIIRm4EeYGcGSBIX/z8L8\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::vxdnw-1748279450872-eed7425e355a"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Asset added to favorites successfully\",\n    \"data\": {\n        \"assetId\": \"68349be47ef121716925713f\",\n        \"title\": \"ER_Diagram.pdf\",\n        \"category\": \"pdfs\",\n        \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748260619/ER_Diagram.pdf.pdf\",\n        \"size\": \"354.38 KB\",\n        \"createdAt\": \"2025-05-26T16:50:44.750Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "preview-favorite-assets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/assets/preview-favorite-assets",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"assets",
+								"preview-favorite-assets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/assets/preview-favorite-assets",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"assets",
+										"preview-favorite-assets"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Age",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:11:57 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"c5-3hsuvj+a6R1V0H86vH7+gNmVULw\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::qwpxf-1748279517198-6740b5872e2b"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Unauthorized access! Please make sure you are logged in.\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Unauthorized access! Please make sure you are logged in.\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/assets/preview-favorite-assets",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"assets",
+										"preview-favorite-assets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "307"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:11:28 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"133-ZLDE9T0bcp8ZoDgqaiueG2Y3aec\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::27hjl-1748279487565-d222a26be12d"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Favorite Assets retrieved successfully\",\n    \"data\": [\n        {\n            \"assetId\": \"68349be47ef121716925713f\",\n            \"title\": \"ER_Diagram.pdf\",\n            \"category\": \"pdfs\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748260619/ER_Diagram.pdf.pdf\",\n            \"size\": \"354.38 KB\",\n            \"createdAt\": \"2025-05-26T16:50:44.750Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "remove-favorite-asset",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/assets/remove-favorite-asset/68349be47ef121716925713f",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"assets",
+								"remove-favorite-asset",
+								"68349be47ef121716925713f"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/assets/remove-favorite-asset/68349be47ef121716925713r",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"assets",
+										"remove-favorite-asset",
+										"68349be47ef121716925713r"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "117"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:12:56 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"75-tnlKMPzbh019YTKTFveA1Lj+BdM\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::lfncj-1748279576455-d2a0361472da"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Invalid asset ID\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Invalid asset ID\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/assets/remove-favorite-asset/68349be47ef121716925713f",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"assets",
+										"remove-favorite-asset",
+										"68349be47ef121716925713f"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "84"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:13:22 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"54-wXeENqrODVoHAlQB/pu0366A434\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::m4k9b-1748279601128-a5f852dc08ed"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Asset removed from favorites successfully\",\n    \"data\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "preview-asstes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/assets/preview-assets/images",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"assets",
+								"preview-assets",
+								"images"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/assets/preview-assets/pdfs",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"assets",
+										"preview-assets",
+										"pdfs"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Age",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:14:51 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"c5-3hsuvj+a6R1V0H86vH7+gNmVULw\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::vk4s6-1748279690887-1a28265af4a0"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Unauthorized access! Please make sure you are logged in.\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Unauthorized access! Please make sure you are logged in.\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/assets/preview-assets/pdfs",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"assets",
+										"preview-assets",
+										"pdfs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "787"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:13:55 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"313-yhfEgnHqVlGvSrxWrF4h61FSGrc\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::z525c-1748279634612-5b9e492a8392"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Assets retrieved successfully\",\n    \"data\": [\n        {\n            \"assetId\": \"68349be47ef121716925713f\",\n            \"title\": \"ER_Diagram.pdf\",\n            \"category\": \"pdfs\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748260619/ER_Diagram.pdf.pdf\",\n            \"size\": \"354.38 KB\",\n            \"createdAt\": \"2025-05-26T16:50:44.750Z\"\n        },\n        {\n            \"assetId\": \"68349bf57ef1217169257145\",\n            \"title\": \"git-cheat-sheet-education.pdf\",\n            \"category\": \"pdfs\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748260573/git-cheat-sheet-education.pdf.pdf\",\n            \"size\": \"97.85 KB\",\n            \"createdAt\": \"2025-05-26T16:51:01.332Z\"\n        },\n        {\n            \"assetId\": \"68349f3d870fd12cc0b770b4\",\n            \"title\": \"cs.102eeb95.pdf\",\n            \"category\": \"pdfs\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748279100/cs.102eeb95.pdf.pdf\",\n            \"size\": \"366.42 KB\",\n            \"createdAt\": \"2025-05-26T17:05:01.055Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "find-asset-by-date",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/assets/find-asset-by-date/2025-05-26",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"assets",
+								"find-asset-by-date",
+								"2025-05-26"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/assets/find-asset-by-date/2025-05-25",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"assets",
+										"find-asset-by-date",
+										"2025-05-25"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "161"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:15:15 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"a1-aS77ZDo0eR0nLHh1rQawAjMw7jU\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::8rdk9-1748279714524-ac4bc498f636"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"No assets found for the specified date\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"No assets found for the specified date\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/assets/find-asset-by-date/2025-05-26",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"assets",
+										"find-asset-by-date",
+										"2025-05-26"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "br"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:15:57 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"50d-gnVVrkNjGK7Uam71Y+80KmqMT78\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::vrsjw-1748279756676-8e6c0f49d71f"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Assets retrieved successfully\",\n    \"data\": [\n        {\n            \"assetId\": \"68349be47ef121716925713f\",\n            \"title\": \"ER_Diagram.pdf\",\n            \"category\": \"pdfs\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748260619/ER_Diagram.pdf.pdf\",\n            \"size\": \"354.38 KB\",\n            \"createdAt\": \"2025-05-26T16:50:44.750Z\"\n        },\n        {\n            \"assetId\": \"68349bf57ef1217169257145\",\n            \"title\": \"git-cheat-sheet-education.pdf\",\n            \"category\": \"pdfs\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748260573/git-cheat-sheet-education.pdf.pdf\",\n            \"size\": \"97.85 KB\",\n            \"createdAt\": \"2025-05-26T16:51:01.332Z\"\n        },\n        {\n            \"assetId\": \"68349c227ef121716925714b\",\n            \"title\": \"iterative_developing_prompt.jpg\",\n            \"category\": \"images\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748278306/iterative_developing_prompt.jpg.jpg\",\n            \"size\": \"27.13 KB\",\n            \"createdAt\": \"2025-05-26T16:51:46.597Z\"\n        },\n        {\n            \"assetId\": \"68349ca3d424b38898ace65f\",\n            \"title\": \"One_Liner_Quotes.jpg\",\n            \"category\": \"images\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748245092/One_Liner_Quotes.jpg.jpg\",\n            \"size\": \"40.48 KB\",\n            \"createdAt\": \"2025-05-26T16:53:55.783Z\"\n        },\n        {\n            \"assetId\": \"68349f3d870fd12cc0b770b4\",\n            \"title\": \"cs.102eeb95.pdf\",\n            \"category\": \"pdfs\",\n            \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748279100/cs.102eeb95.pdf.pdf\",\n            \"size\": \"366.42 KB\",\n            \"createdAt\": \"2025-05-26T17:05:01.055Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "delete-asset",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assetId\": \"68349be47ef121716925713f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/assets/delete-asset",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"assets",
+								"delete-asset"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assetId\": \"683456df1db663719a3b52b1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/assets/delete-asset",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"assets",
+										"delete-asset"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "133"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:16:44 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"85-kQszgj0Num1jnQg7Nql/Qe7nIpE\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::dvrmt-1748279803662-9646681e57d0"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Invalid or unknown asset\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Invalid or unknown asset\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assetId\": \"68349be47ef121716925713f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/assets/delete-asset",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"assets",
+										"delete-asset"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "120"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:17:18 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"78-zUdSHyCZedbqJIrSc/ha96LPhiU\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::q5qd8-1748279836385-107c6cd69a7a"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Asset deleted successfully\",\n    \"data\": {\n        \"message\": \"Asset deleted successfully\",\n        \"success\": true\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "rename-asset",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"assetId\": \"68349bf57ef1217169257145\",\r\n    \"newTitle\": \"git cheat sheet\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/assets/rename-asset",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"assets",
+								"rename-asset"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assetId\": \"68349bf57ef1217169257144\",\r\n    \"newTitle\": \"git cheat sheet\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/assets/rename-asset",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"assets",
+										"rename-asset"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "133"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:18:25 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"85-kQszgj0Num1jnQg7Nql/Qe7nIpE\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::nhzqb-1748279904814-bf8932e3fc4b"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Invalid or unknown asset\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Invalid or unknown asset\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-message-example",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"assetId\": \"68349bf57ef1217169257145\",\r\n    \"newTitle\": \"git cheat sheet\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/assets/rename-asset",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"assets",
+										"rename-asset"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "312"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:18:46 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"138-xbsd3jp6N12tFH1AvdAaSW5t9aY\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::rxwxq-1748279925560-813b6273c7fe"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Asset renamed successfully\",\n    \"data\": {\n        \"assetId\": \"68349bf57ef1217169257145\",\n        \"title\": \"git_cheat_sheet.pdf\",\n        \"category\": \"pdfs\",\n        \"url\": \"https://res.cloudinary.com/dntiz6mw1/image/upload/v1748260573/git-cheat-sheet-education.pdf.pdf\",\n        \"size\": \"97.85 KB\",\n        \"createdAt\": \"2025-05-26T16:51:01.332Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "folder",
+			"item": [
+				{
+					"name": "create-folder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Psychology Articles\",\r\n    \"parentId\": \"6834a2e74347cb849b3921c7\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/folders/create-folder",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"folders",
+								"create-folder"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Tech Assets\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/folders/create-folder",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"folders",
+										"create-folder"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:19:46 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"c5-3hsuvj+a6R1V0H86vH7+gNmVULw\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::jqm42-1748279986068-a5fd914bd576"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Unauthorized access! Please make sure you are logged in.\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Unauthorized access! Please make sure you are logged in.\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Tech Assets\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/folders/create-folder",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"folders",
+										"create-folder"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "142"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:19:20 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"8e-8SvqrddmvofR/N3A8aWZKJ28DoU\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::qq8mn-1748279959742-cf119337df80"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 201,\n    \"message\": \"Folder created successfully\",\n    \"data\": {\n        \"folderId\": \"6834a2984347cb849b3921bd\",\n        \"name\": \"Tech Assets\",\n        \"size\": \"0 Byte\"\n    }\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Tech Articles\",\r\n    \"parentId\": \"6834a2e74347cb849b3921c7\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/folders/create-folder",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"folders",
+										"create-folder"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "144"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:21:00 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"90-YNh5rAW0uFjaUnI+WDTAiZMzH3I\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::2gdn2-1748280059890-3d9b0432b7d3"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 201,\n    \"message\": \"Folder created successfully\",\n    \"data\": {\n        \"folderId\": \"6834a2fc4347cb849b3921cc\",\n        \"name\": \"Tech Articles\",\n        \"size\": \"0 Byte\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "preview-folder",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/folders/preview-folder/6834a2e74347cb849b3921c7",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"folders",
+								"preview-folder",
+								"6834a2e74347cb849b3921c7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/folders/preview-folder/68344ea162fcb1e028e4571f",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"folders",
+										"preview-folder",
+										"68344ea162fcb1e028e4571f"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "117"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:22:21 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"75-CNuuuLtDUjl7pfqw8IzrjKwBWAE\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::9kfq2-1748280140876-d6c0d61f091b"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Folder not found\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Folder not found\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/folders/preview-folder/6834a2e74347cb849b3921c7",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"folders",
+										"preview-folder",
+										"6834a2e74347cb849b3921c7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "480"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:25:15 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"1e0-iJXtzu73I/KYMmpU2yrM1g1nP0k\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::84tds-1748280314305-c97ae428b8d9"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Folder preview retrieved successfully\",\n    \"data\": {\n        \"folderId\": \"6834a2e74347cb849b3921c7\",\n        \"name\": \"Articles\",\n        \"parentId\": null,\n        \"size\": 0,\n        \"assets\": [],\n        \"childFolders\": [\n            {\n                \"_id\": \"6834a2fc4347cb849b3921cc\",\n                \"name\": \"Tech Articles\",\n                \"parentId\": \"6834a2e74347cb849b3921c7\",\n                \"size\": 0,\n                \"createdAt\": \"2025-05-26T17:21:00.691Z\"\n            },\n            {\n                \"_id\": \"6834a3464347cb849b3921d6\",\n                \"name\": \"Economics Articles\",\n                \"parentId\": \"6834a2e74347cb849b3921c7\",\n                \"size\": 0,\n                \"createdAt\": \"2025-05-26T17:22:14.165Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "retrieve-all-root-folders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/folders/retrieve-all-root-folders",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"folders",
+								"retrieve-all-root-folders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://storage-management-system-kappa.vercel.app/api/folders/retrieve-all-root-folders",
+									"protocol": "https",
+									"host": [
+										"storage-management-system-kappa",
+										"vercel",
+										"app"
+									],
+									"path": [
+										"api",
+										"folders",
+										"retrieve-all-root-folders"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Age",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "197"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:23:42 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"c5-3hsuvj+a6R1V0H86vH7+gNmVULw\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "MISS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::xxbjc-1748280222418-34e41219f51f"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Unauthorized access! Please make sure you are logged in.\",\n    \"errorSources\": [\n        {\n            \"path\": \"\",\n            \"message\": \"Unauthorized access! Please make sure you are logged in.\"\n        }\n    ],\n    \"stack\": null\n}"
+						},
+						{
+							"name": "success-response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/folders/retrieve-all-root-folders",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"folders",
+										"retrieve-all-root-folders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Allow-Headers",
+									"value": "Content-Type, Authorization"
+								},
+								{
+									"key": "Access-Control-Allow-Methods",
+									"value": "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "public, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Content-Length",
+									"value": "409"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 26 May 2025 17:24:39 GMT"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"199-hePCQtZCLWciiXpL253iKLstZao\""
+								},
+								{
+									"key": "Server",
+									"value": "Vercel"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=63072000; includeSubDomains; preload"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "X-Vercel-Cache",
+									"value": "BYPASS"
+								},
+								{
+									"key": "X-Vercel-Id",
+									"value": "bom1::iad1::m7qxr-1748280277795-ad873a9f3904"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 200,\n    \"message\": \"Folders retrieved successfully\",\n    \"data\": [\n        {\n            \"folderId\": \"6834a2984347cb849b3921bd\",\n            \"name\": \"Tech Assets\",\n            \"size\": \"0 Byte\",\n            \"createdAt\": \"2025-05-26T17:19:20.543Z\"\n        },\n        {\n            \"folderId\": \"6834a2de4347cb849b3921c2\",\n            \"name\": \"Books\",\n            \"size\": \"0 Byte\",\n            \"createdAt\": \"2025-05-26T17:20:30.223Z\"\n        },\n        {\n            \"folderId\": \"6834a2e74347cb849b3921c7\",\n            \"name\": \"Articles\",\n            \"size\": \"0 Byte\",\n            \"createdAt\": \"2025-05-26T17:20:39.085Z\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
